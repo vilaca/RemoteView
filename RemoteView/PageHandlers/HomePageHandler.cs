@@ -14,7 +14,7 @@ namespace RemoteView.PageHandlers
 
             for (int i = 0; i < screens.Length; i++)
             {
-                staticPage += "| <a href=\"javascript:image.src='/image/" + i + "'\">Screen:" + i + "</a>";
+                staticPage += "| <a href=\"javascript:image.src='screen/" + i + "'\">Screen:" + i + "</a>";
             }
 
             staticPage += "</p><img id=\"image\" name=\"image\" src=\"screen\"></body></html>";

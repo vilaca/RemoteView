@@ -8,7 +8,7 @@ namespace RemoteView.PageHandlers
     {
         private Screen[] screens = Screen.AllScreens;
 
-        public override byte[] getRequest(HttpListenerResponse response, String[] uri)
+        public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {
             String staticPage = "<html><title>Desktop view</title><body><p>";
 

@@ -11,7 +11,7 @@ namespace RemoteView.PageHandlers
     {
         private Screen[] screens = Screen.AllScreens;
 
-        public override byte[] getRequest(HttpListenerResponse response, String[] uri)
+        public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {
             response.Headers.Set("Content-Type", "image/png");
 

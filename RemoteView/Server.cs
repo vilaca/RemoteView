@@ -50,7 +50,7 @@ namespace RemoteView
 
                 HttpListenerResponse response = context.Response;
 
-                byte[] buffer = page.getRequest(response, uri);
+                byte[] buffer = page.handleRequest(response, uri);
 
                 // Get a response stream and write the response to it.
                 response.ContentLength64 = buffer.Length;

@@ -5,7 +5,7 @@ namespace RemoteView
 {
     abstract class PageHandler
     {
-        public abstract byte[] getRequest(HttpListenerResponse response, String[] uri);
+        public abstract byte[] handleRequest(HttpListenerResponse response, String[] uri);
 
     }
 }

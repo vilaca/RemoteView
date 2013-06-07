@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="PageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
+    <Compile Include="PageHandlers\InfoPageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
     <Compile Include="PageHandlers\ScreenPageHandler.cs" />
     <Compile Include="Program.cs" />

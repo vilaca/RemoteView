@@ -19,7 +19,7 @@ namespace RemoteView.PageHandlers
 
             staticPage += "</p>";
 
-            string screen = uri.Length == 2 ? "/0" : "/" + uri[2];
+            string screen = uri.Length > 2 ? "/" + uri[2] : "/0";
             staticPage += "<img id=\"image\" name=\"image\" src=\"/screen" + screen + "\">";
 
             staticPage += "<script>" +

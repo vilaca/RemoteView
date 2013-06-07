@@ -16,7 +16,7 @@ namespace RemoteView.PageHandlers
                 staticPage += "| <a href=\"javascript:image.src='/image/" + i + "'\">Screen:" + i + "</a>";
             }
 
-            staticPage += "</p><img id=\"image\" name=\"image\" src=\"image\"></body></html>";
+            staticPage += "</p><img id=\"image\" name=\"image\" src=\"screen\"></body></html>";
 
             return System.Text.Encoding.UTF8.GetBytes(staticPage);
         }

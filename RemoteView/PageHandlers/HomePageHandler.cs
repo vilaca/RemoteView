@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
@@ -7,7 +8,7 @@ namespace RemoteView.PageHandlers
     {
         private Screen[] screens = Screen.AllScreens;
 
-        public override byte[] getRequest()
+        public override byte[] getRequest(HttpListenerResponse response, String[] uri)
         {
             String staticPage = "<html><title>Desktop view</title><body><p>";
 

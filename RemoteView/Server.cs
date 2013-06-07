@@ -12,18 +12,22 @@ namespace RemoteView
         Dictionary<String, PageHandler> decoder = new Dictionary<string, PageHandler>();
 
         private volatile bool running;
-        //private int port = 6060;    // default port number
+        private int port = 6060;
 
         public Server()
         {
+            // application pages
             decoder.Add("", new HomePageHandler());
+            decoder.Add("screen", new ScreenPageHandler());
+
+            // error pages
             decoder.Add("404", new NotFoundPageHandler());
         }
 
         public void start()
         {
             HttpListener listener = new HttpListener();
-            listener.Prefixes.Add(@"http://*:8080/");
+            listener.Prefixes.Add(@"http://*:" + port + "/");
             listener.Start();
             
             this.running = true;
@@ -32,8 +36,7 @@ namespace RemoteView
             {
                 // Note: The GetContext method blocks while waiting for a request. 
                 HttpListenerContext context = listener.GetContext();
-                HttpListenerResponse response = context.Response;
-                HttpListenerRequest request = context.Request;
+                
 
                 String[] uri = context.Request.RawUrl.Split('/');
 
@@ -45,7 +48,9 @@ namespace RemoteView
                     page = decoder["404"];
                 }
 
-                byte[] buffer = page.getRequest();
+                HttpListenerResponse response = context.Response;
+
+                byte[] buffer = page.getRequest(response, uri);
 
                 // Get a response stream and write the response to it.
                 response.ContentLength64 = buffer.Length;

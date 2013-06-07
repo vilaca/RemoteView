@@ -34,12 +34,14 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
+    <Compile Include="PageHandlers\ScreenPageHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />

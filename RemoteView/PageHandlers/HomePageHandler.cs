@@ -17,14 +17,19 @@ namespace RemoteView.PageHandlers
                 staticPage += "| <a href=\"/home/" + i + "\">Screen:" + i + "</a>";
             }
 
-            if (uri.Length == 2)
-            {
-                staticPage += "</p><img id=\"image\" name=\"image\" src=\"/screen\"></body></html>";
-            }
-            else
-            {
-                staticPage += "</p><img id=\"image\" name=\"image\" src=\"/screen/" + uri[2] + "\"></body></html>";
-            }
+            staticPage += "</p>";
+
+            string screen = uri.Length == 2 ? "/0" : "/" + uri[2];
+            staticPage += "<img id=\"image\" name=\"image\" src=\"/screen" + screen + "\">";
+
+            staticPage += "<script>" +
+                "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" +
+                "image.addEventListener('click', function(e){ handleInput('l',e); });" +
+                "function handleInput(c, e) { e.stopPropagation();e.preventDefault(); }" +
+                "</script>";
+
+            staticPage += "</body></html>";
+
             return System.Text.Encoding.UTF8.GetBytes(staticPage);
         }
     }

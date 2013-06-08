@@ -15,7 +15,7 @@ namespace RemoteView
         /// </summary>
         /// <param name="uri">tokenized URI</param>
         /// <param name="screens">system screens</param>
-        /// <returns></returns>
+        /// <returns>selected screen or default(0)</returns>
         internal int getRequestedScreenDevice(String[] uri, Screen[] screens)
         {
             int screen = 0;

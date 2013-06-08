@@ -60,6 +60,7 @@ namespace RemoteView.PageHandlers
                 case 'd':
                     break;
                 case 'r':
+                    ClickRightMouseButton(x, y);
                     break;
                 default:
                     // error, redirect to home
@@ -183,6 +184,24 @@ namespace RemoteView.PageHandlers
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
 
             mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP;
+            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
+        }
+
+        public void ClickRightMouseButton(int x, int y)
+        {
+            INPUT mouseInput = new INPUT();
+            mouseInput.type = SendInputEventType.InputMouse;
+            mouseInput.mkhi.mi.dx = CalculateAbsoluteCoordinateX(x);
+            mouseInput.mkhi.mi.dy = CalculateAbsoluteCoordinateY(y);
+            mouseInput.mkhi.mi.mouseData = 0;
+
+            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE;
+            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
+
+            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTDOWN;
+            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
+
+            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_RIGHTUP;
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
         }
         #endregion

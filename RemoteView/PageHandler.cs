@@ -9,6 +9,13 @@ namespace RemoteView
     {
         public abstract byte[] handleRequest(HttpListenerResponse response, String[] uri);
 
+        /// <summary>
+        /// Parse from tokenized URI the selected Screen Device.
+        /// Default to 0 if parameter not present or error
+        /// </summary>
+        /// <param name="uri">tokenized URI</param>
+        /// <param name="screens">system screens</param>
+        /// <returns></returns>
         internal int getRequestedScreenDevice(String[] uri, Screen[] screens)
         {
             int screen = 0;

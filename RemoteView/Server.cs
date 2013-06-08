@@ -35,9 +35,18 @@ namespace RemoteView
 
         public void start()
         {
-            HttpListener listener = new HttpListener();
-            listener.Prefixes.Add(@"http://*:" + port + "/");
-            listener.Start();
+            HttpListener listener;
+            try
+            {
+                listener = new HttpListener();
+                listener.Prefixes.Add(@"http://*:" + port + "/");
+                listener.Start();
+            }
+            catch
+            {
+                // oops
+                return;
+            }
 
             this.running = true;
 

@@ -16,14 +16,20 @@ namespace RemoteView
 
         public Server()
         {
-            // application pages
+            // Homepage 
             decoder.Add("", new HomePageHandler());
             decoder.Add("home", new HomePageHandler());
-            
-            decoder.Add("screen", new ScreenPageHandler());
+
+            // information about the system
             decoder.Add("info", new InfoPageHandler());
 
-            // error pages
+            // this page processes clicks into windows events
+            decoder.Add("click", new ClickPageHandler());
+
+            // image of choosen device as a png
+            decoder.Add("screen", new ScreenPageHandler());
+
+            // 404 error page
             decoder.Add("404", new NotFoundPageHandler());
         }
 
@@ -42,7 +48,6 @@ namespace RemoteView
                 {
                     // Note: The GetContext method blocks while waiting for a request. 
                     HttpListenerContext context = listener.GetContext();
-
 
                     String[] uri = context.Request.RawUrl.Split('/');
 

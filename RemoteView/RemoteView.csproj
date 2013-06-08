@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageHandler.cs" />
+    <Compile Include="PageHandlers\ClickPageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\InfoPageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />

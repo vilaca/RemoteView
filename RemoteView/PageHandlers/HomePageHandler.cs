@@ -36,33 +36,22 @@ namespace RemoteView.PageHandlers
 
             // display current screen on image
             // if no parameter for screen, default to 0
-            int screen = 0;
-            if (uri.Length > 2)
-            {
-                try
-                {
-                    screen = Convert.ToInt16(uri[2]);
-                }
-                catch {}
-
-                if ( screen < 0 || screen >= screens.Length )
-                {
-                    screen = 0;
-                }
-            }
+            int screen = getRequestedScreenDevice(uri, screens);
             staticPage += "<img id=\"image\" name=\"image\" src=\"/screen/" + screen + "\">";
 
             // script for handling clicks/dblclicks
             // page /script/ is called for handling clicks
             staticPage += "<script>" +
+
                 "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" +
                 "image.addEventListener('click', function(e){ handleInput('l',e); });" +
+
                 "function handleInput(c, e) { " +
-                "e.stopPropagation();" +
-                "e.preventDefault();" +
-                "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" +
-                "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" +
-                "window.location='/click/" + screen + "/' + c + '/' + py + '/' + px;"
+                    "e.stopPropagation();" +
+                    "e.preventDefault();" +
+                    "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" +
+                    "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" +
+                    "window.location='/click/" + screen + "/' + c + '/' + py + '/' + px;"
                 + "}" +
                 "</script>";
 

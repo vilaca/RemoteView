@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace RemoteView
@@ -35,14 +36,14 @@ namespace RemoteView
             return screen;
         }
 
-        internal string buildHTML(string content)
+        internal byte[] buildHTML(string content)
         {
-            return "<!doctype html>" +
+            return Encoding.UTF8.GetBytes("<!doctype html>" +
                 "<head><title>Remote View</title></head>" +
                 "<body>" +
                 content +
                 "</body>" +
-                "</html>";
+                "</html>");
         }
     }
 }

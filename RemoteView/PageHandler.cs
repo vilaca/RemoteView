@@ -34,5 +34,15 @@ namespace RemoteView
             }
             return screen;
         }
+
+        internal string buildHTML(string content)
+        {
+            return "<!doctype html>" +
+                "<head><title>Remote View</title></head>" +
+                "<body>" +
+                content +
+                "</body>" +
+                "</html>";
+        }
     }
 }

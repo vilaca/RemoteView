@@ -21,13 +21,9 @@ namespace RemoteView.PageHandlers
         public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {
 
-            // basic html, including head tags
-
-            String staticPage = "<html><head><title>Desktop view</title></head><body>";
-
             // list amount of screen devices
 
-            staticPage += "<p>";
+            string staticPage = "<p>";
             for (int i = 0; i < screens.Length; i++)
             {
                 staticPage += "| <a href=\"/home/" + i + "\">Screen:" + i + "</a>";
@@ -57,9 +53,7 @@ namespace RemoteView.PageHandlers
 
             // closing body and html tags
 
-            staticPage += "</body></html>";
-
-            return System.Text.Encoding.UTF8.GetBytes(staticPage);
+            return buildHTML(staticPage);
         }
     }
 }

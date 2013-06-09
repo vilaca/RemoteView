@@ -2,7 +2,6 @@
 using System;
 using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
@@ -24,7 +23,7 @@ namespace RemoteView.PageHandlers
             if (uri.Length != 6)
             {
                 response.Redirect("/");
-                return Encoding.UTF8.GetBytes("<html><body>Error...</body></html>");
+                return buildHTML("Error...");
             }
 
             int x, y;
@@ -37,7 +36,7 @@ namespace RemoteView.PageHandlers
             {
                 // parameter error, redirect to home
                 response.Redirect("/");
-                return Encoding.UTF8.GetBytes("<html><body>Error...</body></html>");
+                return buildHTML("Error...");
             }
 
             int screen = getRequestedScreenDevice(uri, screens);
@@ -47,7 +46,7 @@ namespace RemoteView.PageHandlers
             if (x < 0 || x >= device.Bounds.Width || y < 0 || y >= device.Bounds.Height)
             {
                 response.Redirect("/");
-                return Encoding.UTF8.GetBytes("<html><body>Error...</body></html>");
+                return buildHTML("Error...");
             }
 
             // grab the first character
@@ -65,12 +64,12 @@ namespace RemoteView.PageHandlers
                 default:
                     // error, redirect to home
                     response.Redirect("/");
-                    return Encoding.UTF8.GetBytes("<html><body>Error...</body></html>");
+                    return buildHTML("Error...");
             }
 
             // request a refresh by redirecting to the homepage
             response.Redirect("/home/" + screen);
-            return Encoding.UTF8.GetBytes("<html><body>Redirecting...</body></html>");
+            return buildHTML("Updating...");
         }
 
         enum SystemMetric

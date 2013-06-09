@@ -2,7 +2,9 @@ RemoteView
 ==========
 
 
-Desktop sharing throught HTTP. No need for a dedicated client.
+Desktop sharing HTTP server.
+
+No need for a dedicated client, any modern browser will do.
 
 
-Haven't thought of a licence yet.
+Licensed as GPL. See license file or <http://www.gnu.org/licenses/>.

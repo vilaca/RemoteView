@@ -39,16 +39,31 @@ namespace RemoteView.PageHandlers
             // page /script/ is called for handling clicks
             staticPage += "<script>" +
 
-                "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" +
-                "image.addEventListener('click', function(e){ handleInput('l',e); });" +
+                "var clickCounter = 0;" + Environment.NewLine +
+                "var lastEvent = null;" + Environment.NewLine +
+                "var timeout = null;" + Environment.NewLine +
 
-                "function handleInput(c, e) { " +
-                    "e.stopPropagation();" +
-                    "e.preventDefault();" +
-                    "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" +
-                    "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" +
-                    "window.location='/click/" + screen + "/' + c + '/' + py + '/' + px;"
-                + "}" +
+                "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" + Environment.NewLine +
+                "image.addEventListener('click', function(e){ handleInput('c',e); });" + Environment.NewLine +
+
+                "function handleInput(c, e) { " + Environment.NewLine +
+
+                    // on first click set timeout for a left click with copyed event
+
+                    " if ( c == 'c' && clickCounter == 0 ) " + Environment.NewLine +
+                    " { clickCounter++; lastEvent = e; timeout = setTimeout( function(){ handleInput('l',lastEvent); },500); return; } " + Environment.NewLine +
+
+                    // on second click clear timeout and trigger double click by changing event
+
+                    " else if ( c == 'c' && clickCounter > 0 ) " + Environment.NewLine +
+                    " { clearTimeout(timeout); c = 'd' } " + Environment.NewLine +
+
+                    "e.stopPropagation();" + Environment.NewLine +
+                    "e.preventDefault();" + Environment.NewLine +
+                    "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
+                    "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
+                    "window.location='/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
+                "}" +
                 "</script>";
 
             // closing body and html tags

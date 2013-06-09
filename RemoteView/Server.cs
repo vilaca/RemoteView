@@ -29,6 +29,9 @@ namespace RemoteView
             // image of choosen device as a png
             decoder.Add("screen", new ScreenPageHandler());
 
+            // image of choosen device as a png
+            decoder.Add("favicon.ico", new IconPageHandler());
+
             // 404 error page
             decoder.Add("404", new NotFoundPageHandler());
         }

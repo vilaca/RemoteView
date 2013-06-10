@@ -53,9 +53,8 @@ namespace RemoteView.PageHandlers
             "function doubleBufferLoader () {" + Environment.NewLine +
                 " var newImageUrl = '/screen/' + new Date();" + Environment.NewLine +
                 " var anImage = new Image();" + Environment.NewLine +
-                " anImage.addEventListener( 'load', function(){ image.src=newImageUrl; }, false );" + Environment.NewLine +
+                " anImage.addEventListener( 'load', function(){ image.src=newImageUrl; setTimeout('doubleBufferLoader();', 1000); }, false );" + Environment.NewLine +
                 " anImage.src = newImageUrl; " + Environment.NewLine +
-                "setTimeout('doubleBufferLoader();', 1000);" + Environment.NewLine +
             "}" + Environment.NewLine +
 
             "function handleInput(c, e) { " + Environment.NewLine +

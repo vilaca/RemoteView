@@ -38,12 +38,12 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageHandler.cs" />
     <Compile Include="PageHandlers\ClickPageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\IconPageHandler.cs" />
     <Compile Include="PageHandlers\InfoPageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
+    <Compile Include="PageHandlers\PageHandler.cs" />
     <Compile Include="PageHandlers\ScreenPageHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

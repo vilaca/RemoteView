@@ -4,7 +4,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
-namespace RemoteView
+namespace RemoteView.PageHandlers
 {
     abstract class PageHandler
     {

@@ -68,8 +68,6 @@ namespace RemoteView.PageHandlers
                     return buildHTML("Error...");
             }
 
-            // request a refresh by redirecting to the homepage
-            response.Redirect("/home/" + screen);
             return buildHTML("Updating...");
         }
 

@@ -43,6 +43,8 @@ namespace RemoteView.PageHandlers
                 "var lastEvent = null;" + Environment.NewLine +
                 "var timeout = null;" + Environment.NewLine +
 
+                "var http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(\"Microsoft.XMLHTTP\");" + Environment.NewLine +
+
                 "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" + Environment.NewLine +
                 "image.addEventListener('click', function(e){ handleInput('c',e); });" + Environment.NewLine +
 
@@ -58,11 +60,19 @@ namespace RemoteView.PageHandlers
                     " else if ( c == 'c' && clickCounter > 0 ) " + Environment.NewLine +
                     " { clearTimeout(timeout); c = 'd' } " + Environment.NewLine +
 
+                    "clickCounter = 0;" + Environment.NewLine +
+
                     "e.stopPropagation();" + Environment.NewLine +
                     "e.preventDefault();" + Environment.NewLine +
                     "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
                     "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
-                    "window.location='/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
+
+                    "var request = '/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
+
+                    "http.open('GET', request, true);" + Environment.NewLine +
+                    "http.send();" + Environment.NewLine +
+
+
                 "}" +
                 "</script>";
 

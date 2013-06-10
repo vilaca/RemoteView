@@ -36,7 +36,7 @@ namespace RemoteView.PageHandlers
             staticPage += "<img id=\"image\" name=\"image\" src=\"/screen/" + screen + "\">";
 
             // script for handling clicks/dblclicks
-            // page /script/ is called for handling clicks
+            // page /click/ is called for handling clicks
             staticPage += "<script>" +
 
                 "var clickCounter = 0;" + Environment.NewLine +
@@ -48,33 +48,42 @@ namespace RemoteView.PageHandlers
                 "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" + Environment.NewLine +
                 "image.addEventListener('click', function(e){ handleInput('c',e); });" + Environment.NewLine +
 
-                "function handleInput(c, e) { " + Environment.NewLine +
+                "setTimeout('doubleBufferLoader();', 1000);" + Environment.NewLine +
 
-                    // on first click set timeout for a left click with copyed event
+            "function doubleBufferLoader () {" + Environment.NewLine +
+                " var newImageUrl = '/screen/' + new Date();" + Environment.NewLine +
+                " var anImage = new Image();" + Environment.NewLine +
+                " anImage.addEventListener( 'load', function(){ image.src=newImageUrl; }, false );" + Environment.NewLine +
+                " anImage.src = newImageUrl; " + Environment.NewLine +
+                "setTimeout('doubleBufferLoader();', 1000);" + Environment.NewLine +
+            "}" + Environment.NewLine +
 
-                    " if ( c == 'c' && clickCounter == 0 ) " + Environment.NewLine +
-                    " { clickCounter++; lastEvent = e; timeout = setTimeout( function(){ handleInput('l',lastEvent); },500); return; } " + Environment.NewLine +
+            "function handleInput(c, e) { " + Environment.NewLine +
 
-                    // on second click clear timeout and trigger double click by changing event
+                // on first click set timeout for a left click with copyed event
 
-                    " else if ( c == 'c' && clickCounter > 0 ) " + Environment.NewLine +
-                    " { clearTimeout(timeout); c = 'd' } " + Environment.NewLine +
+                " if ( c == 'c' && clickCounter == 0 ) " + Environment.NewLine +
+                " { clickCounter++; lastEvent = e; timeout = setTimeout( function(){ handleInput('l',lastEvent); },500); return; } " + Environment.NewLine +
 
-                    "clickCounter = 0;" + Environment.NewLine +
+                // on second click clear timeout and trigger double click by changing event
 
-                    "e.stopPropagation();" + Environment.NewLine +
-                    "e.preventDefault();" + Environment.NewLine +
-                    "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
-                    "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
+                " else if ( c == 'c' && clickCounter > 0 ) " + Environment.NewLine +
+                " { clearTimeout(timeout); c = 'd' } " + Environment.NewLine +
 
-                    "var request = '/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
+                "clickCounter = 0;" + Environment.NewLine +
 
-                    "http.open('GET', request, true);" + Environment.NewLine +
-                    "http.send();" + Environment.NewLine +
+                "e.stopPropagation();" + Environment.NewLine +
+                "e.preventDefault();" + Environment.NewLine +
+                "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
+                "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
 
+                "var request = '/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
 
-                "}" +
-                "</script>";
+                "http.open('GET', request, true);" + Environment.NewLine +
+                "http.send();" + Environment.NewLine +
+
+            "}" +
+            "</script>";
 
             // closing body and html tags
 

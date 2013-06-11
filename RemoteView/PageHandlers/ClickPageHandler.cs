@@ -56,9 +56,6 @@ namespace RemoteView.PageHandlers
                     // left click
                     ClickLeftMouseButton(x, y);
                     break;
-                case 'd':
-                    DoubleClickMouseButton(x, y);
-                    break;
                 case 'r':
                     ClickRightMouseButton(x, y);
                     break;
@@ -176,30 +173,6 @@ namespace RemoteView.PageHandlers
             mouseInput.mkhi.mi.mouseData = 0;
 
             mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTDOWN;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-        }
-
-        public void DoubleClickMouseButton(int x, int y)
-        {
-            INPUT mouseInput = new INPUT();
-            mouseInput.type = SendInputEventType.InputMouse;
-            mouseInput.mkhi.mi.dx = CalculateAbsoluteCoordinateX(x);
-            mouseInput.mkhi.mi.dy = CalculateAbsoluteCoordinateY(y);
-            mouseInput.mkhi.mi.mouseData = 0;
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTDOWN;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP;
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
 
             mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTDOWN;

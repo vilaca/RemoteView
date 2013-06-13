@@ -42,7 +42,7 @@ namespace RemoteView
             try
             {
                 listener = new HttpListener();
-                listener.Prefixes.Add(@"http://*:" + port + "/");
+                listener.Prefixes.Add(@"http://localhost:" + port + "/");
                 listener.Start();
             }
             catch

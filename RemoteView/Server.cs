@@ -12,8 +12,10 @@ namespace RemoteView
         Dictionary<String, PageHandler> decoder = new Dictionary<string, PageHandler>();
 
         private volatile bool running;
-        private int port = 6060;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
         public Server()
         {
             // Homepage 
@@ -36,18 +38,22 @@ namespace RemoteView
             decoder.Add("404", new NotFoundPageHandler());
         }
 
-        public void start()
+        /// <summary>
+        /// Start server
+        /// </summary>
+        /// <param name="port">port to listen to</param>
+        public void start(int port)
         {
             HttpListener listener;
             try
             {
                 listener = new HttpListener();
-                listener.Prefixes.Add(@"http://localhost:" + port + "/");
+                listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
             }
             catch
             {
-                // oops
+                Console.WriteLine("Could not listen on port: {0}.", port);
                 return;
             }
 
@@ -65,9 +71,9 @@ namespace RemoteView
 
                     PageHandler page;
                     bool found = decoder.TryGetValue(uri[1], out page);
-
                     if (!found)
                     {
+                        // if page not found display 404 page
                         page = decoder["404"];
                     }
 
@@ -97,11 +103,18 @@ namespace RemoteView
             listener.Stop();
         }
 
+        /// <summary>
+        /// Stop server
+        /// </summary>
         public void stop()
         {
             this.running = false;
         }
 
+        /// <summary>
+        /// is server running?
+        /// </summary>
+        /// <returns></returns>
         public bool isRunning()
         {
             return this.running == true;

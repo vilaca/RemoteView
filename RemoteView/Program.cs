@@ -25,34 +25,32 @@ namespace RemoteView
 
             foreach (string arg in args)
             {
-                switch (arg)
+                if (arg.Equals("-b"))
                 {
-                    case "-b":
-                        banner = false;
-                        break;
-                    case "-h":
-                    case "-help":
-                        help = true;
-                        break;
-                    default:
-                        if (arg.StartsWith("-p"))
-                        {
-                            try
-                            {
-                                port = Convert.ToInt16(arg.Substring(2));
-                            }
-                            catch
-                            {
-                                error = true;
-                            }
-                        }
-                        else
-                        {
-                            error = true;
-                        }
-                        break;
+                    banner = false;
+                }
+                else if (arg.Equals("-b"))
+                {
+
+                    help = true;
+                }
+                else if (arg.StartsWith("-p"))
+                {
+                    try
+                    {
+                        port = Convert.ToInt16(arg.Substring(2));
+                    }
+                    catch
+                    {
+                        error = true;
+                    }
+                }
+                else
+                {
+                    error = true;
                 }
             }
+            
 
             if (banner)
             {
@@ -80,10 +78,9 @@ namespace RemoteView
             }).Start();
 
             Console.WriteLine("Server running press [c] to stop");
-
             while (Console.ReadKey(true).Key != ConsoleKey.C) ;
-
             server.stop();
+
         }
 
         private static void showBanner()

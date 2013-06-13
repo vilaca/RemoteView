@@ -91,7 +91,7 @@ namespace RemoteView
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.GetType().ToString());
+                    Console.WriteLine(e.Message);
                     try
                     {
                         if (output != null) output.Close();

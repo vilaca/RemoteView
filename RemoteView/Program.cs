@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace RemoteView
@@ -71,7 +72,18 @@ namespace RemoteView
             }
 
             // run server
-            new Server().start(port);
+            Server server = new Server();
+
+            new Thread(() =>
+            {
+                server.start(port);
+            }).Start();
+
+            Console.WriteLine("Server running press [c] to stop");
+
+            while (Console.ReadKey(true).Key != ConsoleKey.C) ;
+
+            server.stop();
         }
 
         private static void showBanner()

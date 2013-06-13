@@ -10,6 +10,7 @@ namespace RemoteView
     class Server
     {
         Dictionary<String, PageHandler> decoder = new Dictionary<string, PageHandler>();
+        HttpListener listener;
 
         private volatile bool running;
 
@@ -44,7 +45,6 @@ namespace RemoteView
         /// <param name="port">port to listen to</param>
         public void start(int port)
         {
-            HttpListener listener;
             try
             {
                 listener = new HttpListener();
@@ -89,8 +89,9 @@ namespace RemoteView
                     // must close the output stream.
                     output.Close();
                 }
-                catch
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.GetType().ToString());
                     try
                     {
                         if (output != null) output.Close();
@@ -109,6 +110,7 @@ namespace RemoteView
         public void stop()
         {
             this.running = false;
+            this.listener.Stop();
         }
 
         /// <summary>

@@ -42,6 +42,7 @@
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\IconPageHandler.cs" />
     <Compile Include="PageHandlers\InfoPageHandler.cs" />
+    <Compile Include="PageHandlers\JavascriptPageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
     <Compile Include="PageHandlers\PageHandler.cs" />
     <Compile Include="PageHandlers\ScreenPageHandler.cs" />

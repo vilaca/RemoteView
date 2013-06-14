@@ -23,6 +23,8 @@ namespace RemoteView
             decoder.Add("", new HomePageHandler());
             decoder.Add("home", new HomePageHandler());
 
+            decoder.Add("script", new JavascriptPageHandler());
+
             // information about the system
             decoder.Add("info", new InfoPageHandler());
 

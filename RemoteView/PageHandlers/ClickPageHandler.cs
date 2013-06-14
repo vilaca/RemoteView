@@ -52,9 +52,11 @@ namespace RemoteView.PageHandlers
             // grab the first character
             switch (uri[3][0])
             {
-                case 'l':
-                    // left click
-                    ClickLeftMouseButton(x, y);
+                case 'd':
+                    LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
+                    break;
+                case 'u':
+                    LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
                     break;
                 case 'r':
                     ClickRightMouseButton(x, y);
@@ -154,17 +156,17 @@ namespace RemoteView.PageHandlers
             public IntPtr dwExtraInfo;
         }
 
-        int CalculateAbsoluteCoordinateX(int x)
+        private int CalculateAbsoluteCoordinateX(int x)
         {
             return (x * 65536) / GetSystemMetrics(SystemMetric.SM_CXSCREEN);
         }
 
-        int CalculateAbsoluteCoordinateY(int y)
+        private int CalculateAbsoluteCoordinateY(int y)
         {
             return (y * 65536) / GetSystemMetrics(SystemMetric.SM_CYSCREEN);
         }
 
-        public void ClickLeftMouseButton(int x, int y)
+        private void LeftMouseButton(MouseEventFlags mouseEventFlags, int x, int y)
         {
             INPUT mouseInput = new INPUT();
             mouseInput.type = SendInputEventType.InputMouse;
@@ -175,14 +177,11 @@ namespace RemoteView.PageHandlers
             mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_MOVE | MouseEventFlags.MOUSEEVENTF_ABSOLUTE;
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
 
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTDOWN;
-            SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
-
-            mouseInput.mkhi.mi.dwFlags = MouseEventFlags.MOUSEEVENTF_LEFTUP;
+            mouseInput.mkhi.mi.dwFlags = mouseEventFlags;
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
         }
 
-        public void ClickRightMouseButton(int x, int y)
+        private void ClickRightMouseButton(int x, int y)
         {
             INPUT mouseInput = new INPUT();
             mouseInput.type = SendInputEventType.InputMouse;

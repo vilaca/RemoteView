@@ -42,15 +42,20 @@ namespace RemoteView.PageHandlers
                 "var http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(\"Microsoft.XMLHTTP\");" + Environment.NewLine +
 
                 "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" + Environment.NewLine +
-                "image.addEventListener('click', function(e){ handleInput('l',e); });" + Environment.NewLine +
+                "image.addEventListener('mousedown', function(e){ handleInput('d',e); });" + Environment.NewLine +
+                "image.addEventListener('mouseup', function(e){ handleInput('u',e); });" + Environment.NewLine +
 
                 "setTimeout('doubleBufferLoader();', 1000);" + Environment.NewLine +
 
+            // reload image and trigger another reload in 1sec after image has loaded
+
             "function doubleBufferLoader () {" + Environment.NewLine +
+                
                 " var newImageUrl = '/screen/' + new Date();" + Environment.NewLine +
                 " var anImage = new Image();" + Environment.NewLine +
                 " anImage.addEventListener( 'load', function(){ image.src=newImageUrl; setTimeout('doubleBufferLoader();', 1000); }, false );" + Environment.NewLine +
                 " anImage.src = newImageUrl; " + Environment.NewLine +
+            
             "}" + Environment.NewLine +
 
             "function handleInput(c, e) { " + Environment.NewLine +

@@ -9,6 +9,7 @@ namespace RemoteView.PageHandlers
     class ClickPageHandler : PageHandler
     {
         private Screen[] screens = Screen.AllScreens;
+        private byte last = (byte)' ';
 
         /// <summary>
         /// Act upon clicks received from application.
@@ -53,15 +54,29 @@ namespace RemoteView.PageHandlers
             switch (uri[3][0])
             {
                 case 'd':
+                    if (last == 'd')
+                    {
+                        // simulate an up
+                        LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
+                    }
                     LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
+                    last = (byte)'d';
                     break;
                 case 'u':
+                    if (last == 'u')
+                    {
+                        // simulate a down
+                        LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
+                    }
                     LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
+                    last = (byte)'u';
                     break;
                 case 'r':
                     ClickRightMouseButton(x, y);
+                    last = (byte)' ';
                     break;
                 default:
+                    last = (byte)' ';
                     // error, redirect to home
                     response.Redirect("/");
                     return buildHTML("Error...");

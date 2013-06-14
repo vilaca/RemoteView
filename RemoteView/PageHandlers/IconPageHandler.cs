@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class IconPageHandler : PageHandler
+    class IconPageHandler : AbstractPageHandler
     {
         byte[] buffer;
 

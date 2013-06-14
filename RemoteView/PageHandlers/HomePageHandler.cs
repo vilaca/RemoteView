@@ -6,7 +6,7 @@ namespace RemoteView.PageHandlers
 {
     // This class is responsable for generating all the HTML and javascript the the application homepage
 
-    class HomePageHandler : PageHandler
+    class HomePageHandler : AbstractPageHandler
     {
         // screen devices list
         private Screen[] screens = Screen.AllScreens;

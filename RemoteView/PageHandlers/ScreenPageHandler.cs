@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class ScreenPageHandler : PageHandler
+    class ScreenPageHandler : AbstractPageHandler
     {
         private Screen[] screens = Screen.AllScreens;
 

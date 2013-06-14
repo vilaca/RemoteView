@@ -3,7 +3,7 @@ using System.Net;
 
 namespace RemoteView.PageHandlers
 {
-    class NotFoundPageHandler : PageHandler
+    class NotFoundPageHandler : AbstractPageHandler
     {
         public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {

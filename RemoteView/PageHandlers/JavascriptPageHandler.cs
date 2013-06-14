@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class JavascriptPageHandler : PageHandler
+    class JavascriptPageHandler : AbstractPageHandler
     {
         // screen devices list
         private Screen[] screens = Screen.AllScreens;

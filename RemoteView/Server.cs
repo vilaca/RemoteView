@@ -9,7 +9,7 @@ namespace RemoteView
 {
     class Server
     {
-        Dictionary<String, PageHandler> decoder = new Dictionary<string, PageHandler>();
+        Dictionary<String, AbstractPageHandler> decoder = new Dictionary<string, AbstractPageHandler>();
         HttpListener listener;
 
         private volatile bool running;
@@ -75,7 +75,7 @@ namespace RemoteView
                     Console.WriteLine(context.Request.RawUrl);
 #endif
 
-                    PageHandler page;
+                    AbstractPageHandler page;
                     bool found = decoder.TryGetValue(uri[1], out page);
                     if (!found)
                     {

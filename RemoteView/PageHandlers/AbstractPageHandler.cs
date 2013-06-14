@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    abstract class PageHandler
+    abstract class AbstractPageHandler
     {
         public abstract byte[] handleRequest(HttpListenerResponse response, String[] uri);
 

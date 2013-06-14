@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class ClickPageHandler : PageHandler
+    class ClickPageHandler : AbstractPageHandler
     {
         private Screen[] screens = Screen.AllScreens;
         private byte last = (byte)' ';

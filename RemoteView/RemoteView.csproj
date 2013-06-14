@@ -38,13 +38,15 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageHandlers\AbstractClickPageHandler.cs" />
     <Compile Include="PageHandlers\AbstractPageHandler.cs" />
-    <Compile Include="PageHandlers\ClickPageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\IconPageHandler.cs" />
     <Compile Include="PageHandlers\InfoPageHandler.cs" />
     <Compile Include="PageHandlers\JavascriptPageHandler.cs" />
+    <Compile Include="PageHandlers\LeftClickPageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
+    <Compile Include="PageHandlers\RightClickPageHandler.cs" />
     <Compile Include="PageHandlers\ScreenPageHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

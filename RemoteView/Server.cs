@@ -23,13 +23,15 @@ namespace RemoteView
             decoder.Add("", new HomePageHandler());
             decoder.Add("home", new HomePageHandler());
 
+            // javascript page handles client side clicks and screen image updates
             decoder.Add("script", new JavascriptPageHandler());
 
             // information about the system
             decoder.Add("info", new InfoPageHandler());
 
-            // this page processes clicks into windows events
-            decoder.Add("click", new ClickPageHandler());
+            // this pages process clicks into server side windows events
+            decoder.Add("leftclick", new LeftClickPageHandler());
+            decoder.Add("rightclick", new RightClickPageHandler());
 
             // image of choosen device as a png
             decoder.Add("screen", new ScreenPageHandler());

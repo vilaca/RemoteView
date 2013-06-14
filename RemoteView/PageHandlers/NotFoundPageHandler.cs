@@ -7,6 +7,7 @@ namespace RemoteView.PageHandlers
     {
         public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {
+            response.StatusCode = 404;
             return buildHTML("Page not found!");
         }
     }

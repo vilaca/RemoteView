@@ -15,36 +15,62 @@ namespace RemoteView.PageHandlers
         {
             int screen = getRequestedScreenDevice(uri, screens);
 
-            return Encoding.UTF8.GetBytes("var http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(\"Microsoft.XMLHTTP\");" + Environment.NewLine +
+            return Encoding.UTF8.GetBytes(
 
-                "image.addEventListener('contextmenu', function(e){ handleInput('r',e); });" + Environment.NewLine +
-                "image.addEventListener('mousedown', function(e){ handleInput('d',e); });" + Environment.NewLine +
-                "image.addEventListener('mouseup', function(e){ handleInput('u',e); });" + Environment.NewLine +
+                "var http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(\"Microsoft.XMLHTTP\");" + Environment.NewLine +
 
-                "setTimeout('doubleBufferLoader();', 1000);" + Environment.NewLine +
+                // incremented everytime a new screen image is requested
+                "var counter = 0;" + Environment.NewLine +
 
-            // reload image and trigger another reload in 1sec after image has loaded
+                // cache last mouse down event
+                "var mousedownEvt = null;" + Environment.NewLine +
 
-            "function doubleBufferLoader () {" + Environment.NewLine +
+                // listeners for mouse actions
+                "image.addEventListener('contextmenu', function(e){ rightclick(e); });" + Environment.NewLine +
+                "image.addEventListener('mousedown', function(e){ mouseDown(e); });" + Environment.NewLine +
+                "image.addEventListener('mouseup', function(e){ mouseUp(e); });" + Environment.NewLine +
 
-                " var newImageUrl = '/screen/' + new Date().getMilliseconds();" + Environment.NewLine +
-                " var anImage = new Image();" + Environment.NewLine +
-                " anImage.addEventListener( 'load', function(){ image.src=newImageUrl; setTimeout('doubleBufferLoader();', 1000); }, false );" + Environment.NewLine +
-                " anImage.src = newImageUrl; " + Environment.NewLine +
+                // interval to ask server for a new screen image
+                "setInterval('imageLoader();', 1000);" + Environment.NewLine +
+
+            // reload image
+            "function imageLoader () {" + Environment.NewLine +
+
+                " var newImageUrl = '/screen/' + (counter++);" + Environment.NewLine +
+                " image.src = newImageUrl; " + Environment.NewLine +
 
             "}" + Environment.NewLine +
 
-            "function handleInput(c, e) { " + Environment.NewLine +
-
+            "function cancelUiEvts (e) {" + Environment.NewLine +
                 "e.stopPropagation();" + Environment.NewLine +
                 "e.preventDefault();" + Environment.NewLine +
+            "}" + Environment.NewLine +
+
+            "function sendRequest (e,c) {" + Environment.NewLine +
+
                 "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
                 "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
-
                 "var request = '/click/" + screen + "/' + c + '/' + py + '/' + px;" + Environment.NewLine +
-
                 "http.open('GET', request, true);" + Environment.NewLine +
                 "http.send();" + Environment.NewLine +
+
+            "}" + Environment.NewLine +
+
+            "function mouseDown (e) {" + Environment.NewLine +
+                "cancelUiEvts(e);" + Environment.NewLine +
+                "mousedownEvt = e;" + Environment.NewLine +
+            "}" + Environment.NewLine +
+
+            "function mouseUp (e) {" + Environment.NewLine +
+                "cancelUiEvts(e);" + Environment.NewLine +
+                "sendRequest(mousedownEvt,'d');" + Environment.NewLine +
+                "sendRequest(e,'u');" + Environment.NewLine +
+            "}" + Environment.NewLine +
+
+            "function rightclick(e) { " + Environment.NewLine +
+
+                "cancelUiEvts(e);" + Environment.NewLine +
+                "sendRequest(e,'r');" + Environment.NewLine +
 
             "}");
         }

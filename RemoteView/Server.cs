@@ -71,6 +71,10 @@ namespace RemoteView
 
                     String[] uri = context.Request.RawUrl.Split('/');
 
+#if DEBUG
+                    Console.WriteLine(context.Request.RawUrl);
+#endif
+
                     PageHandler page;
                     bool found = decoder.TryGetValue(uri[1], out page);
                     if (!found)

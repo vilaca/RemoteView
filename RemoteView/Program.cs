@@ -50,7 +50,7 @@ namespace RemoteView
                     error = true;
                 }
             }
-            
+
 
             if (banner)
             {
@@ -77,10 +77,17 @@ namespace RemoteView
                 server.start(port);
             }).Start();
 
-            Console.WriteLine("Server running press [c] to stop");
-            while (Console.ReadKey(true).Key != ConsoleKey.C) ;
-            server.stop();
+            Thread.Sleep(2000);
 
+            if (!server.isRunning())
+            {
+                Console.WriteLine("Could not start server... Exiting.");
+                return;
+            }
+
+            Console.WriteLine("Server running press [c] to stop");
+            while (server.isRunning() && Console.ReadKey(true).Key != ConsoleKey.C) ;
+            server.stop();
         }
 
         private static void showBanner()

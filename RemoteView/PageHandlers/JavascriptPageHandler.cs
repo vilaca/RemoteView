@@ -21,9 +21,6 @@ namespace RemoteView.PageHandlers
 
                 "var http = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject(\"Microsoft.XMLHTTP\");" + Environment.NewLine +
 
-                // incremented everytime a new screen image is requested
-                "var counter = 0;" + Environment.NewLine +
-
                 // cache last mouse down event
                 "var mousedownEvt = null;" + Environment.NewLine +
 
@@ -31,15 +28,24 @@ namespace RemoteView.PageHandlers
                 "image.addEventListener('contextmenu', function(e){ rightclick(e); });" + Environment.NewLine +
                 "image.addEventListener('mousedown', function(e){ mouseDown(e); });" + Environment.NewLine +
                 "image.addEventListener('mouseup', function(e){ mouseUp(e); });" + Environment.NewLine +
+                "image.addEventListener( 'load', setReloadTimeout );" + Environment.NewLine +
 
                 // interval to ask server for a new screen image
-                "setInterval('imageLoader();', 1000);" + Environment.NewLine +
+                "setInterval('imageLoader();', 5500);" + Environment.NewLine +
+
+            // reload image
+            "function setReloadTimeout () {" + Environment.NewLine +
+
+                // interval to ask server for a new screen image
+                "setTimeout('imageLoader();', 1000);" + Environment.NewLine +
+
+            "}" + Environment.NewLine +
 
             // reload image
             "function imageLoader () {" + Environment.NewLine +
 
-                " var newImageUrl = '/screen/' + (counter++);" + Environment.NewLine +
-                " image.src = newImageUrl; " + Environment.NewLine +
+                " var newImageUrl = '/screen/' + new Date() / 1;" + Environment.NewLine +
+                " document.getElementById(\"image\").src = newImageUrl; " + Environment.NewLine +
 
             "}" + Environment.NewLine +
 

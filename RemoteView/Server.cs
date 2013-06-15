@@ -32,6 +32,7 @@ namespace RemoteView
             // this pages process clicks into server side windows events
             decoder.Add("leftclick", new LeftClickPageHandler());
             decoder.Add("rightclick", new RightClickPageHandler());
+            decoder.Add("mousemove", new MouseMovePageHandler());
 
             // image of choosen device as a png
             decoder.Add("screen", new ScreenPageHandler());

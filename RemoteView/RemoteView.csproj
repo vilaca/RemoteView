@@ -45,6 +45,7 @@
     <Compile Include="PageHandlers\InfoPageHandler.cs" />
     <Compile Include="PageHandlers\JavascriptPageHandler.cs" />
     <Compile Include="PageHandlers\LeftClickPageHandler.cs" />
+    <Compile Include="PageHandlers\MouseMovePageHandler.cs" />
     <Compile Include="PageHandlers\NotFoundPageHandler.cs" />
     <Compile Include="PageHandlers\RightClickPageHandler.cs" />
     <Compile Include="PageHandlers\ScreenPageHandler.cs" />

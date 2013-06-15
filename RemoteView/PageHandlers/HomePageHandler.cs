@@ -35,7 +35,7 @@ namespace RemoteView.PageHandlers
             staticPage += "<img id=\"image\" name=\"image\" src=\"/screen/" + screen + "\">";
 
             // script for handling clicks/dblclicks/contextclicks
-            staticPage += "<script src=\"/script/" + screen + "\"></script>";
+            staticPage += "<script src=\"/script/" + screen + "/" + DateTime.Now.Ticks + "\"></script>";
 
             // closing body and html tags
 

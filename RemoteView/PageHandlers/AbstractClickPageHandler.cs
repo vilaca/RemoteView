@@ -6,6 +6,11 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
+
+    /// <summary>
+    /// This class is heavily based on source code presented as an answer at
+    /// http://stackoverflow.com/questions/8021954/sendinput-doesnt-perform-click-mouse-button-unless-i-move-cursor
+    /// </summary>
     abstract class AbstractClickPageHandler : AbstractPageHandler
     {
         enum SystemMetric
@@ -13,8 +18,6 @@ namespace RemoteView.PageHandlers
             SM_CXSCREEN = 0,
             SM_CYSCREEN = 1,
         }
-
-        #region http://stackoverflow.com/questions/8021954/sendinput-doesnt-perform-click-mouse-button-unless-i-move-cursor
         
         [DllImport("user32.dll")]
         static extern int GetSystemMetrics(SystemMetric smIndex);
@@ -149,8 +152,5 @@ namespace RemoteView.PageHandlers
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
 
         }
-
-        #endregion
-
     }
 }

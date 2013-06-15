@@ -8,8 +8,14 @@ namespace RemoteView.PageHandlers
 {
     class IconPageHandler : AbstractPageHandler
     {
+        /// <summary>
+        /// cached copy of favicon
+        /// </summary>
         byte[] buffer;
 
+        /// <summary>
+        /// c'tor, creates chached copy of favicon
+        /// </summary>
         public IconPageHandler()
         {
             using (MemoryStream icon = new MemoryStream())
@@ -20,6 +26,12 @@ namespace RemoteView.PageHandlers
             }
         }
 
+        /// <summary>
+        /// not much to do here, just return the cached favicon
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
         {
             return buffer;

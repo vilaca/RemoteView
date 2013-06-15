@@ -10,6 +10,12 @@ namespace RemoteView.PageHandlers
         // screen devices list
         private Screen[] screens = Screen.AllScreens;
 
+        /// <summary>
+        /// All client side scripting is here. Tasks include detecting clicks, mouse moves and updating screen image
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
         {
             int screen = getRequestedScreenDevice(uri, screens);

@@ -11,6 +11,12 @@ namespace RemoteView.PageHandlers
     {
         private Screen[] screens = Screen.AllScreens;
 
+        /// <summary>
+        /// Get a copy of the requested device screen image
+        /// </summary>
+        /// <param name="response"></param>
+        /// <param name="uri"></param>
+        /// <returns></returns>
         public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
         {
             response.Headers.Set("Content-Type", "image/png");

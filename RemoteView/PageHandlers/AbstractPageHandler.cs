@@ -6,8 +6,17 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
+    /// <summary>
+    /// base class for all the request handlers
+    /// </summary>
     abstract class AbstractPageHandler
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="response">response to be sent to client</param>
+        /// <param name="uri">tokenized request URI</param>
+        /// <returns>response body</returns>
         public abstract byte[] handleRequest(HttpListenerResponse response, String[] uri);
 
         /// <summary>
@@ -36,14 +45,19 @@ namespace RemoteView.PageHandlers
             return screen;
         }
 
+        /// <summary>
+        /// boilerplate HTML wraping for all the response streams
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         internal byte[] buildHTML(string content)
         {
-            return Encoding.UTF8.GetBytes("<!doctype html>" +
-                "<head><title>Remote View</title></head>" +
-                "<body>" +
+            return Encoding.UTF8.GetBytes("<!doctype html>" + Environment.NewLine +
+                "<head><title>Remote View</title></head>" + Environment.NewLine +
+                "<body>" + Environment.NewLine +
                 content +
-                "</body>" +
-                "</html>");
+                "</body>" + Environment.NewLine +
+                "</html>" + Environment.NewLine);
         }
     }
 }

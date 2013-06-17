@@ -48,6 +48,11 @@ namespace RemoteView.PageHandlers
                 return buildHTML("Error...");
             }
 
+            // adapt to real screen bounds
+
+            x = device.Bounds.X + x;
+            y = device.Bounds.X + y;
+
             ClickRightMouseButton(x,y);
 
             return buildHTML("Updating...");

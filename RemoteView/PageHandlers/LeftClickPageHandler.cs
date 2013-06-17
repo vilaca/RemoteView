@@ -65,6 +65,12 @@ namespace RemoteView.PageHandlers
                 return true;
             }
 
+
+            // adapt to real screen bounds
+
+            x = device.Bounds.X + x;
+            y = device.Bounds.X + y;
+
             LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
 
             return false;
@@ -89,6 +95,11 @@ namespace RemoteView.PageHandlers
             {
                 return true;
             }
+
+            // adapt to real screen bounds
+
+            x = device.Bounds.X + x;
+            y = device.Bounds.X + y;
 
             LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
 

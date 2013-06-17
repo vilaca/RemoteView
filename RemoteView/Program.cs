@@ -29,18 +29,18 @@ namespace RemoteView
                 {
                     banner = false;
                 }
-                else if (arg.Equals("-b"))
+                else if (arg.Equals("-h"))
                 {
-
                     help = true;
                 }
                 else if (arg.StartsWith("-p"))
                 {
-                    try
+                    int n;
+                    if (int.TryParse(arg.Substring(2), out n))
                     {
-                        port = Convert.ToInt16(arg.Substring(2));
+                        port = n;
                     }
-                    catch
+                    else
                     {
                         error = true;
                     }
@@ -50,7 +50,6 @@ namespace RemoteView
                     error = true;
                 }
             }
-
 
             if (banner)
             {
@@ -92,18 +91,18 @@ namespace RemoteView
 
         private static void showBanner()
         {
-            Console.WriteLine(Application.ProductName + " - Desktop sharing server");
+            Console.WriteLine(Application.ProductName + " - Desktop sharing server" + Environment.NewLine );
         }
 
         private static void showHelpMessage()
         {
             Console.WriteLine("Usage:");
+            Console.WriteLine("RemoteView [-pN] [-b] [-h]");
+            Console.WriteLine("\t-p :\tListen on port N;");
             Console.WriteLine("\t-b :\tDon't show banner message;");
             Console.WriteLine("\t-h :\tThis screen;");
-            Console.WriteLine("\t-pXXXX :\tListen in port XXXX.");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");
             //            Console.WriteLine("\t-u :\tUninstall as Windows service");
-            Console.WriteLine("Usage:");
         }
     }
 }

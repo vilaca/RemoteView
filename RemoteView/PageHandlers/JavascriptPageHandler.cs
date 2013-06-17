@@ -54,6 +54,9 @@ namespace RemoteView.PageHandlers
                 "e = mouseMoveEvt" + Environment.NewLine +
                 "px = e.offsetX ? e.offsetX :e.pageX-document.getElementById(\"image\").offsetLeft;" + Environment.NewLine +
                 "py = e.offsetY ? e.offsetY :e.pageY-document.getElementById(\"image\").offsetTop;" + Environment.NewLine +
+
+                "mouseMoveEvt = null;" + Environment.NewLine +
+                
                 "var request = '/mousemove/" + screen + "/' + py + '/' + px;" + Environment.NewLine +
                 "http.open('GET', request, true);" + Environment.NewLine +
                 "http.send();" + Environment.NewLine +

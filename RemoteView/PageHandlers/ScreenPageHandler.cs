@@ -21,26 +21,10 @@ namespace RemoteView.PageHandlers
         {
             response.Headers.Set("Content-Type", "image/png");
 
-            Screen screen;
-            if (uri.Length > 2)
-            {
-                try
-                {
-                    int n = Convert.ToInt16(uri[2]);
-                    screen = screens[n];
-                }
-                catch
-                {
-                    screen = screens[0];
-                }
-            }
-            else
-            {
-                screen = screens[0];
-            }
+            Screen screen = screens[getRequestedScreenDevice(uri, screens)];
 
             using (MemoryStream ms = new MemoryStream())
-            {                
+            {
                 Bitmap bmp = new Bitmap(screen.Bounds.Width, screen.Bounds.Height);
                 Graphics.FromImage(bmp).CopyFromScreen(screen.Bounds.X, screen.Bounds.Y, 0, 0, screen.Bounds.Size);
                 bmp.Save(ms, ImageFormat.Png);

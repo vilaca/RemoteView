@@ -70,7 +70,7 @@ namespace RemoteView.PageHandlers
 
             // reload image
             "function imageLoader () {" + Environment.NewLine +
-                " var newImageUrl = '/screen/' + new Date() / 1;" + Environment.NewLine +
+                " var newImageUrl = '/screen/" + screen + "/' + new Date() / 1;" + Environment.NewLine +
                 " document.getElementById(\"image\").src = newImageUrl; " + Environment.NewLine +
             "}" + Environment.NewLine +
 

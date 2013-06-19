@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Reflection;
+using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -10,6 +12,7 @@ namespace RemoteView
     {
         static void Main(string[] args)
         {
+
             bool banner = true, help = false, error = false;
             int port = 6060;
 
@@ -68,6 +71,25 @@ namespace RemoteView
                 return;
             }
 
+            if (!IsRunningAsAdministrator())
+            {
+                ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+                processInfo.UseShellExecute = true;
+                processInfo.Verb = "runas";
+                processInfo.Arguments = String.Join(" ", args);
+
+                try
+                {
+                    Process.Start(processInfo);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Needs administrator rights.");
+                }
+                return;
+            }
+
+
             // run server
             Server server = new Server();
 
@@ -91,7 +113,7 @@ namespace RemoteView
 
         private static void showBanner()
         {
-            Console.WriteLine(Application.ProductName + " - Desktop sharing server" + Environment.NewLine );
+            Console.WriteLine(Application.ProductName + " - Desktop sharing server" + Environment.NewLine);
         }
 
         private static void showHelpMessage()
@@ -103,6 +125,11 @@ namespace RemoteView
             Console.WriteLine("\t-h :\tThis screen;");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");
             //            Console.WriteLine("\t-u :\tUninstall as Windows service");
+        }
+
+        private static bool IsRunningAsAdministrator()
+        {
+            return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

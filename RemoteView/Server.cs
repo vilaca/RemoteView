@@ -9,10 +9,8 @@ namespace RemoteView
 {
     class Server
     {
-        Dictionary<String, AbstractPageHandler> decoder = new Dictionary<string, AbstractPageHandler>();
-        HttpListener listener;
-
-        private volatile bool running;
+        private Dictionary<String, AbstractPageHandler> decoder = new Dictionary<string, AbstractPageHandler>();
+        private HttpListener listener = new HttpListener();
 
         /// <summary>
         /// Constructor
@@ -52,7 +50,6 @@ namespace RemoteView
         {
             try
             {
-                listener = new HttpListener();
                 listener.Prefixes.Add("http://*:" + port + "/");
                 listener.Start();
             }
@@ -62,10 +59,9 @@ namespace RemoteView
                 return;
             }
 
-            this.running = true;
-
             do
             {
+                HttpListenerResponse response = null;
                 Stream output = null;
                 try
                 {
@@ -86,7 +82,7 @@ namespace RemoteView
                         page = decoder["404"];
                     }
 
-                    HttpListenerResponse response = context.Response;
+                    response = context.Response;
 
                     byte[] buffer = page.handleRequest(response, uri);
 
@@ -95,20 +91,25 @@ namespace RemoteView
                     output = response.OutputStream;
                     output.Write(buffer, 0, buffer.Length);
 
-                    // must close the output stream.
-                    output.Close();
                 }
                 catch (Exception e)
                 {
-                    if (this.running) Console.WriteLine(e.Message);
-                    try
+                    if (listener.IsListening) Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    if (response != null)
                     {
-                        if (output != null) output.Close();
+                        response.Close();
+                        try
+                        {
+                            if (output != null) output.Close();
+                        }
+                        catch { }
                     }
-                    catch { }
                 }
             }
-            while (this.running);
+            while (listener.IsListening);
 
             listener.Stop();
         }
@@ -118,7 +119,6 @@ namespace RemoteView
         /// </summary>
         public void stop()
         {
-            this.running = false;
             this.listener.Stop();
         }
 
@@ -128,7 +128,7 @@ namespace RemoteView
         /// <returns></returns>
         public bool isRunning()
         {
-            return this.running == true;
+            return listener.IsListening;
         }
     }
 }

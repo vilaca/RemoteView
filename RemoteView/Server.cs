@@ -100,12 +100,12 @@ namespace RemoteView
                 {
                     if (response != null)
                     {
-                        response.Close();
                         try
                         {
                             if (output != null) output.Close();
                         }
                         catch { }
+                        response.Close();
                     }
                 }
             }

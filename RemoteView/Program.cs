@@ -16,6 +16,24 @@ namespace RemoteView
             bool banner = true, help = false, error = false;
             int port = 6060;
 
+            if (!IsRunningAsAdministrator())
+            {
+                ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+                processInfo.UseShellExecute = true;
+                processInfo.Verb = "runas";
+                processInfo.Arguments = String.Join(" ", args);
+
+                try
+                {
+                    Process.Start(processInfo);
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Needs administrator rights.");
+                }
+                return;
+            }
+
             // check if http listener is supported
 
             if (!HttpListener.IsSupported)
@@ -70,25 +88,6 @@ namespace RemoteView
                 Console.WriteLine("Error in Parameter.");
                 return;
             }
-
-            if (!IsRunningAsAdministrator())
-            {
-                ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-                processInfo.UseShellExecute = true;
-                processInfo.Verb = "runas";
-                processInfo.Arguments = String.Join(" ", args);
-
-                try
-                {
-                    Process.Start(processInfo);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Needs administrator rights.");
-                }
-                return;
-            }
-
 
             // run server
             Server server = new Server();

@@ -9,11 +9,14 @@ namespace RemoteView.PageHandlers
 {
     class ScreenPageHandler : AbstractPageHandler
     {
-        private Screen[] screens = Screen.AllScreens;
         private volatile byte[][] caches = new byte[Screen.AllScreens.Length][];
-        volatile int lastScreenRequested = 0;
+        private volatile int lastScreenRequested = 0;
+        private Screen[] screens = Screen.AllScreens;
         private System.Timers.Timer timer;
 
+        /// <summary>
+        /// C'tor init cache for all screens
+        /// </summary>
         public ScreenPageHandler()
         {
             for (int i = 0; i < caches.Length; i++)
@@ -22,11 +25,16 @@ namespace RemoteView.PageHandlers
             }
 
             timer = new System.Timers.Timer(1000);
-            timer.Elapsed += timer_Elapsed;
+            timer.Elapsed += reloadCache;
             timer.Enabled = true;
         }
 
-        private void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        /// <summary>
+        /// reload image for last requested screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void reloadCache(object sender, System.Timers.ElapsedEventArgs e)
         {
             int toReload = lastScreenRequested;
             caches[toReload] = serializeScreenImage(toReload);

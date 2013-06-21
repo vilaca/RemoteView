@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -37,7 +38,15 @@ namespace RemoteView.PageHandlers
         private void reloadCache(object sender, System.Timers.ElapsedEventArgs e)
         {
             int toReload = lastScreenRequested;
+#if DEBUG
+            Stopwatch perfCounter = new Stopwatch();
+            perfCounter.Start();
+#endif
             caches[toReload] = serializeScreenImage(toReload);
+#if DEBUG
+            perfCounter.Stop();
+            Console.WriteLine("Time elapsed: {0}", perfCounter.Elapsed);
+#endif
         }
 
         /// <summary>
@@ -70,6 +79,5 @@ namespace RemoteView.PageHandlers
                 return ms.GetBuffer();
             }
         }
-
     }
 }

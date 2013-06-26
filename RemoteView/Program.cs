@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Security.Principal;
@@ -15,6 +16,16 @@ namespace RemoteView
 
             bool banner = true, help = false, error = false;
             int port = 6060;
+
+            // make sure only one instance is online
+
+            Process[] RunningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ExecutablePath));
+            if (RunningProcesses.Length != 1)
+            {
+                return;
+            }
+
+            // get admin level
 
             if (!IsRunningAsAdministrator())
             {
@@ -97,6 +108,7 @@ namespace RemoteView
                 server.start(port);
             }).Start();
 
+            // works!
             Thread.Sleep(2000);
 
             if (!server.isRunning())

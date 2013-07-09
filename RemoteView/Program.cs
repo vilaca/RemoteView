@@ -73,6 +73,15 @@ namespace RemoteView
             }
 
             // run server
+            RunServer(conf);
+        }
+
+        /// <summary>
+        /// Run server
+        /// </summary>
+        /// <param name="conf">server configuration</param>
+        private static void RunServer(Configuration conf)
+        {
             Server server = new Server();
 
             new Thread(() =>

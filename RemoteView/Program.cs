@@ -37,6 +37,8 @@ namespace RemoteView
                 return;
             }
 
+            // get configuration from command line parameters
+
             Configuration conf;
             try
             {
@@ -74,6 +76,10 @@ namespace RemoteView
             return runningProcesses.Length;
         }
 
+        /// <summary>
+        /// Relaunch this Application with Admin user level if possible
+        /// </summary>
+        /// <param name="args"></param>
         private static void RunAsAdministrator(string[] args)
         {
             ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);

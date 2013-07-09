@@ -26,19 +26,7 @@ namespace RemoteView
 
             if (!IsRunningAsAdministrator())
             {
-                ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-                processInfo.UseShellExecute = true;
-                processInfo.Verb = "runas";
-                processInfo.Arguments = String.Join(" ", args);
-
-                try
-                {
-                    Process.Start(processInfo);
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Needs administrator rights.");
-                }
+                RunAsAdministrator(args);
                 return;
             }
 
@@ -74,6 +62,23 @@ namespace RemoteView
 
             // run server
             RunServer(conf);
+        }
+
+        private static void RunAsAdministrator(string[] args)
+        {
+            ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
+            processInfo.UseShellExecute = true;
+            processInfo.Verb = "runas";
+            processInfo.Arguments = String.Join(" ", args);
+
+            try
+            {
+                Process.Start(processInfo);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Needs administrator rights.");
+            }
         }
 
         /// <summary>

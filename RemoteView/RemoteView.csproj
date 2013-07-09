@@ -38,6 +38,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration.cs" />
     <Compile Include="PageHandlers\AbstractClickPageHandler.cs" />
     <Compile Include="PageHandlers\AbstractPageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />

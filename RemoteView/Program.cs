@@ -14,9 +14,6 @@ namespace RemoteView
         static void Main(string[] args)
         {
 
-            bool banner = true, help = false, error = false;
-            int port = 6060;
-
             // make sure only one instance is online
 
             Process[] RunningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ExecutablePath));
@@ -53,50 +50,25 @@ namespace RemoteView
                 return;
             }
 
-            // parse command line params
-
-            foreach (string arg in args)
+            Configuration conf;
+            try
             {
-                if (arg.Equals("-b"))
-                {
-                    banner = false;
-                }
-                else if (arg.Equals("-h"))
-                {
-                    help = true;
-                }
-                else if (arg.StartsWith("-p"))
-                {
-                    int n;
-                    if (int.TryParse(arg.Substring(2), out n))
-                    {
-                        port = n;
-                    }
-                    else
-                    {
-                        error = true;
-                    }
-                }
-                else
-                {
-                    error = true;
-                }
+                conf = Configuration.CreateConfiguration(args);
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return;
             }
 
-            if (banner)
+            if (conf.Banner)
             {
                 showBanner();
             }
 
-            if (help)
+            if (conf.Help)
             {
                 showHelpMessage();
-                return;
-            }
-
-            if (error)
-            {
-                Console.WriteLine("Error in Parameter.");
                 return;
             }
 
@@ -105,7 +77,7 @@ namespace RemoteView
 
             new Thread(() =>
             {
-                server.start(port);
+                server.start(conf.Port);
             }).Start();
 
             // works!

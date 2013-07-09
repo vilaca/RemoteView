@@ -16,8 +16,7 @@ namespace RemoteView
 
             // make sure only one instance is online
 
-            Process[] RunningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ExecutablePath));
-            if (RunningProcesses.Length != 1)
+            if (GetRunningProcesses() != 1)
             {
                 return;
             }
@@ -62,6 +61,17 @@ namespace RemoteView
 
             // run server
             RunServer(conf);
+        }
+
+        /// <summary>
+        /// Get amount of processes with the same name as this program that are currently running on the system
+        /// </summary>
+        /// <returns>n processes</returns>
+        private static int GetRunningProcesses()
+        {
+            Process[] runningProcesses;
+            runningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ExecutablePath));
+            return runningProcesses.Length;
         }
 
         private static void RunAsAdministrator(string[] args)

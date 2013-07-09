@@ -9,7 +9,14 @@ namespace RemoteView
 {
     class Server
     {
+        /// <summary>
+        /// Keep list of all resources to be invoked according to received HTTP requests
+        /// </summary>
         private Dictionary<String, AbstractPageHandler> decoder = new Dictionary<string, AbstractPageHandler>();
+        
+        /// <summary>
+        /// HTTP listener for server
+        /// </summary>
         private HttpListener listener = new HttpListener();
 
         /// <summary>
@@ -17,6 +24,7 @@ namespace RemoteView
         /// </summary>
         public Server()
         {
+
             // Homepage 
             decoder.Add("", new HomePageHandler());
             decoder.Add("home", new HomePageHandler());

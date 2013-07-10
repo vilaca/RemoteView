@@ -6,6 +6,11 @@ namespace RemoteView
     class Configuration
     {
         /// <summary>
+        /// Allow multiple instances of process
+        /// </summary>
+        public bool AllowMultiple { get; private set; }
+
+        /// <summary>
         /// Display banner
         /// </summary>
         public bool Banner { get; private set; }
@@ -26,6 +31,7 @@ namespace RemoteView
         /// </summary>
         private Configuration()
         {
+            this.AllowMultiple = false;
             this.Banner = true;
             this.Help = false;
             this.Port = 6060;
@@ -39,7 +45,11 @@ namespace RemoteView
 
             foreach (string arg in args)
             {
-                if (arg.Equals("-b"))
+                if (arg.Equals("-m"))
+                {
+                    conf.AllowMultiple = true;
+                }
+                else if (arg.Equals("-b"))
                 {
                     conf.Banner = false;
                 }

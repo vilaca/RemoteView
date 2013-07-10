@@ -29,7 +29,7 @@ namespace RemoteView
             {
                 conf = Configuration.CreateConfiguration(args);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
                 return;
@@ -48,7 +48,7 @@ namespace RemoteView
 
             // make sure only one instance is online
 
-            if (GetRunningProcesses() != 1)
+            if (!conf.AllowMultiple && GetRunningProcesses() != 1)
             {
                 Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
                 return;

@@ -11,6 +11,14 @@ namespace RemoteView
 {
     class Program
     {
+        static string ApplicationName
+        {
+            get
+            {
+                return Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+            }
+        }
+
         static void Main(string[] args)
         {
 
@@ -72,7 +80,7 @@ namespace RemoteView
         private static int GetRunningProcesses()
         {
             Process[] runningProcesses;
-            runningProcesses = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Application.ExecutablePath));
+            runningProcesses = Process.GetProcessesByName(ApplicationName);
             return runningProcesses.Length;
         }
 
@@ -126,16 +134,17 @@ namespace RemoteView
 
         private static void showBanner()
         {
-            Console.WriteLine(Application.ProductName + " - Desktop sharing server" + Environment.NewLine);
+            Console.WriteLine(Application.ProductName + " - Desktop sharing server");
+            Console.WriteLine("Copyright (c) Joao Vilaca, 2013, Email: jvilaca@gmail.com");
+            Console.WriteLine();
         }
 
         private static void showHelpMessage()
         {
-            Console.WriteLine("Usage:");
-            Console.WriteLine("RemoteView [-pN] [-b] [-h]");
-            Console.WriteLine("\t-p :\tListen on port N;");
-            Console.WriteLine("\t-b :\tDon't show banner message;");
-            Console.WriteLine("\t-h :\tThis screen;");
+            Console.WriteLine("Syntax: " + ApplicationName + " [Port to listen] [Options]");
+            Console.WriteLine("Example: " + ApplicationName + " 6060 -b");
+            Console.WriteLine("Options: -b :\tDon't show banner message;");
+            Console.WriteLine("         -h :\tHelp (This screen);");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");
             //            Console.WriteLine("\t-u :\tUninstall as Windows service");
         }

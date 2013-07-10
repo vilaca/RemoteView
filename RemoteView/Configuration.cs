@@ -8,17 +8,17 @@ namespace RemoteView
         /// <summary>
         /// Display banner
         /// </summary>
-        public bool Banner { get; set; }
+        public bool Banner { get; private set; }
 
         /// <summary>
         /// Display help
         /// </summary>
-        public bool Help { get; set; }
+        public bool Help { get; private set; }
 
         /// <summary>
         /// Port where to listen
         /// </summary>
-        public int Port { get; set; }
+        public int Port { get; private set; }
 
         /// <summary>
         /// Private c'tor with default values for object instances
@@ -63,7 +63,6 @@ namespace RemoteView
                     throw new ArgumentException(string.Format("Error: {0} is an invalid command line parameter.", arg));
                 }
             }
-
 
             return conf;
         }

@@ -22,30 +22,6 @@ namespace RemoteView
         static void Main(string[] args)
         {
 
-            // make sure only one instance is online
-
-            if (GetRunningProcesses() != 1)
-            {
-                Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
-                return;
-            }
-
-            // get admin level
-
-            if (!IsRunningAsAdministrator())
-            {
-                RunAsAdministrator(args);
-                return;
-            }
-
-            // check if http listener is supported
-
-            if (!HttpListener.IsSupported)
-            {
-                Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
-                return;
-            }
-
             // get configuration from command line parameters
 
             Configuration conf;
@@ -67,6 +43,30 @@ namespace RemoteView
             if (conf.Help)
             {
                 showHelpMessage();
+                return;
+            }
+
+            // make sure only one instance is online
+
+            if (GetRunningProcesses() != 1)
+            {
+                Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
+                return;
+            }
+
+            // get admin level
+
+            if (!IsRunningAsAdministrator())
+            {
+                RunAsAdministrator(args);
+                return;
+            }
+
+            // check if http listener is supported
+
+            if (!HttpListener.IsSupported)
+            {
+                Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
                 return;
             }
 

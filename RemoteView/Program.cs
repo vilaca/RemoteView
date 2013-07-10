@@ -26,6 +26,7 @@ namespace RemoteView
 
             if (GetRunningProcesses() != 1)
             {
+                Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
                 return;
             }
 

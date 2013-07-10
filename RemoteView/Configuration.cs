@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections;
 
 namespace RemoteView
 {
@@ -37,42 +38,59 @@ namespace RemoteView
             this.Port = 6060;
         }
 
-        public static Configuration CreateConfiguration(string[] args)
+        public static Configuration CreateConfiguration(string[] parameters)
         {
             Configuration conf = new Configuration();
 
-            // parse command line params
+            // use default configuration if no parameters exist
 
-            foreach (string arg in args)
+            if (parameters.Length == 0) return conf;
+
+            // cycle throught command line using enumerator on parameters array
+
+            IEnumerator enumerator = parameters.GetEnumerator();
+            enumerator.MoveNext();
+
+            string parameter = (string)enumerator.Current;
+
+            // parse if first parameter is a valid integer and use it as a port number for listener
+
+            int port;
+            bool hasPortParameter = int.TryParse(parameter, out port);
+
+            if (hasPortParameter)
             {
-                if (arg.Equals("-m"))
+                conf.Port = port;
+
+                // continue parsing parameters (if they exist)
+                if (!enumerator.MoveNext()) return conf;
+                parameter = (string)enumerator.Current;
+            }
+
+            do
+            {
+                if (parameter.Equals("-m"))
                 {
                     conf.AllowMultiple = true;
                 }
-                else if (arg.Equals("-b"))
+                else if (parameter.Equals("-b"))
                 {
                     conf.Banner = false;
                 }
-                else if (arg.Equals("-h"))
+                else if (parameter.Equals("-h"))
                 {
                     conf.Help = true;
                 }
-                else if (arg.StartsWith("-p"))
-                {
-                    try
-                    {
-                        conf.Port = int.Parse(arg);
-                    }
-                    catch
-                    {
-                        throw new ArgumentException(string.Format("Error: {0} is not a valid port number.", arg));
-                    }
-                }
                 else
                 {
-                    throw new ArgumentException(string.Format("Error: {0} is an invalid command line parameter.", arg));
+                    throw new ArgumentException(string.Format("Error: {0} is an invalid command line parameter.", parameter));
                 }
+
+                if (!enumerator.MoveNext()) break;
+
+                parameter = (string)enumerator.Current;
             }
+            while (true);
 
             return conf;
         }

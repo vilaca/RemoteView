@@ -59,6 +59,7 @@ namespace RemoteView
             try
             {
                 listener.Prefixes.Add("http://*:" + port + "/");
+                listener.IgnoreWriteExceptions = true;
                 listener.Start();
             }
             catch

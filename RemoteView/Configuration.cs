@@ -38,7 +38,7 @@ namespace RemoteView
             this.Port = 6060;
         }
 
-        public static Configuration CreateConfiguration(string[] parameters)
+        public static Configuration create(string[] parameters)
         {
             Configuration conf = new Configuration();
 

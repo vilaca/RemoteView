@@ -17,7 +17,7 @@ namespace RemoteView.PageHandlers
         /// <param name="response">not used</param>
         /// <param name="uri">raw URI tokenized by '/'</param>
         /// <returns>HTML page + javascript</returns>
-        public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, String[] uri)
         {
 
             // list amount of screen devices
@@ -31,7 +31,7 @@ namespace RemoteView.PageHandlers
 
             // display current screen on image
             // if no parameter for screen, default to 0
-            int screen = getRequestedScreenDevice(uri, screens);
+            int screen = GetRequestedScreenDevice(uri, screens);
             staticPage += "<img id=\"image\" name=\"image\" src=\"/screen/" + screen + "\">";
 
             // script for handling clicks/dblclicks/contextclicks
@@ -39,7 +39,7 @@ namespace RemoteView.PageHandlers
 
             // closing body and html tags
 
-            return buildHTML(staticPage);
+            return BuildHTML(staticPage);
         }
     }
 }

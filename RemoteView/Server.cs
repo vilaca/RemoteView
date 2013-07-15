@@ -54,7 +54,7 @@ namespace RemoteView
         /// Start server
         /// </summary>
         /// <param name="port">port to listen to</param>
-        public void start(int port)
+        public void Start(int port)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace RemoteView
 
                     response = context.Response;
 
-                    byte[] buffer = page.handleRequest(response, uri);
+                    byte[] buffer = page.HandleRequest(response, uri);
 
                     // Get a response stream and write the response to it.
                     response.ContentLength64 = buffer.Length;
@@ -126,7 +126,7 @@ namespace RemoteView
         /// <summary>
         /// Stop server
         /// </summary>
-        public void stop()
+        public void Stop()
         {
             this.listener.Stop();
         }
@@ -135,7 +135,7 @@ namespace RemoteView
         /// is server running?
         /// </summary>
         /// <returns></returns>
-        public bool isRunning()
+        public bool IsRunning()
         {
             return listener.IsListening;
         }

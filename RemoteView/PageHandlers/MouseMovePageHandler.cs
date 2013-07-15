@@ -9,13 +9,13 @@ namespace RemoteView.PageHandlers
         // screen devices list
         private Screen[] screens = Screen.AllScreens;
 
-        public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, string[] uri)
         {
             // must have 5 tokens
             if (uri.Length != 5)
             {
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
 
             int x, y;
@@ -28,17 +28,17 @@ namespace RemoteView.PageHandlers
             {
                 // parameter error
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
 
-            int screen = getRequestedScreenDevice(uri, screens);
+            int screen = GetRequestedScreenDevice(uri, screens);
 
             // check bounds
             Screen device = screens[screen];
             if (x < 0 || x >= device.Bounds.Width || y < 0 || y >= device.Bounds.Height)
             {
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
 
             // adapt to real screen bounds
@@ -48,7 +48,7 @@ namespace RemoteView.PageHandlers
 
             MoveMouse(x, y);
 
-            return buildHTML("Updating...");
+            return BuildHTML("Updating...");
         }
     }
 }

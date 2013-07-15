@@ -27,7 +27,7 @@ namespace RemoteView
             Configuration conf;
             try
             {
-                conf = Configuration.CreateConfiguration(args);
+                conf = Configuration.create(args);
             }
             catch (Exception e)
             {
@@ -37,12 +37,12 @@ namespace RemoteView
 
             if (conf.Banner)
             {
-                showBanner();
+                ShowBanner();
             }
 
             if (conf.Help)
             {
-                showHelpMessage();
+                ShowHelpMessage();
                 return;
             }
 
@@ -116,31 +116,31 @@ namespace RemoteView
 
             new Thread(() =>
             {
-                server.start(conf.Port);
+                server.Start(conf.Port);
             }).Start();
 
             // works!
             Thread.Sleep(2000);
 
-            if (!server.isRunning())
+            if (!server.IsRunning())
             {
                 Console.WriteLine("Could not start server... Exiting.");
                 return;
             }
 
             Console.WriteLine("Server running press [c] to stop");
-            while (server.isRunning() && Console.ReadKey(true).Key != ConsoleKey.C) ;
-            server.stop();
+            while (server.IsRunning() && Console.ReadKey(true).Key != ConsoleKey.C) ;
+            server.Stop();
         }
 
-        private static void showBanner()
+        private static void ShowBanner()
         {
             Console.WriteLine(Application.ProductName + " - Desktop sharing server");
             Console.WriteLine("Copyright (c) Joao Vilaca, 2013, Email: jvilaca@gmail.com");
             Console.WriteLine();
         }
 
-        private static void showHelpMessage()
+        private static void ShowHelpMessage()
         {
             Console.WriteLine("Syntax: " + ApplicationName + " [Port to listen] [Options]");
             Console.WriteLine("Example: " + ApplicationName + " 6060 -b");

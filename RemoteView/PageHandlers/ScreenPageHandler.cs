@@ -22,7 +22,7 @@ namespace RemoteView.PageHandlers
         {
             for (int i = 0; i < caches.Length; i++)
             {
-                caches[i] = serializeScreenImage(i);
+                caches[i] = SerializeScreenImage(i);
             }
 
             timer = new System.Timers.Timer(1000);
@@ -42,7 +42,7 @@ namespace RemoteView.PageHandlers
             Stopwatch perfCounter = new Stopwatch();
             perfCounter.Start();
 #endif
-            caches[toReload] = serializeScreenImage(toReload);
+            caches[toReload] = SerializeScreenImage(toReload);
 #if DEBUG
             perfCounter.Stop();
             Console.WriteLine("Time elapsed: {0}", perfCounter.Elapsed);
@@ -55,9 +55,9 @@ namespace RemoteView.PageHandlers
         /// <param name="response"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, String[] uri)
         {
-            int requested = getRequestedScreenDevice(uri, screens);
+            int requested = GetRequestedScreenDevice(uri, screens);
             lastScreenRequested = requested;
             response.Headers.Set("Content-Type", "image/png");
             return caches[requested];
@@ -68,7 +68,7 @@ namespace RemoteView.PageHandlers
         /// </summary>
         /// <param name="requested">screen to serialize</param>
         /// <returns></returns>
-        private byte[] serializeScreenImage(int requested)
+        private byte[] SerializeScreenImage(int requested)
         {
             Screen screen = screens[requested];
             using (MemoryStream ms = new MemoryStream())

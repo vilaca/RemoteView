@@ -16,9 +16,9 @@ namespace RemoteView.PageHandlers
         /// <param name="response"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, string[] uri)
         {
-            int screen = getRequestedScreenDevice(uri, screens);
+            int screen = GetRequestedScreenDevice(uri, screens);
 
             response.ContentType = "application/javascript";
 

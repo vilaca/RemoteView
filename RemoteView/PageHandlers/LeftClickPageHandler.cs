@@ -15,23 +15,23 @@ namespace RemoteView.PageHandlers
         /// <param name="response"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, string[] uri)
         {
             // must have 5 tokens
             if (uri.Length != 7)
             {
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
 
-            int screen = getRequestedScreenDevice(uri, screens);
+            int screen = GetRequestedScreenDevice(uri, screens);
 
             bool error = handleMouseDown(uri, screen);
             if (error)
             {
                 // parameter error
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
             
             error = handleMouseUp(uri, screen);
@@ -39,10 +39,10 @@ namespace RemoteView.PageHandlers
             {
                 // parameter error
                 response.StatusCode = 400;
-                return buildHTML("Error...");
+                return BuildHTML("Error...");
             }
 
-            return buildHTML("Updating...");
+            return BuildHTML("Updating...");
         }
 
         private bool handleMouseDown(string[] uri, int screen)

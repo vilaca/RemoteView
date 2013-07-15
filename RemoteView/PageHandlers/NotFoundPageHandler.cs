@@ -11,10 +11,10 @@ namespace RemoteView.PageHandlers
         /// <param name="response"></param>
         /// <param name="uri"></param>
         /// <returns></returns>
-        public override byte[] handleRequest(HttpListenerResponse response, String[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, String[] uri)
         {
             response.StatusCode = 404;
-            return buildHTML("Page not found!");
+            return BuildHTML("Page not found!");
         }
     }
 }

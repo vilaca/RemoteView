@@ -7,7 +7,7 @@ namespace RemoteView.PageHandlers
     {
         private Screen[] screens = Screen.AllScreens;
 
-        public override byte[] handleRequest(HttpListenerResponse response, string[] uri)
+        public override byte[] HandleRequest(HttpListenerResponse response, string[] uri)
         {
             string page = "<p><b>Desktop Viewer - Desktop sharing Application</b></p>";
 
@@ -16,7 +16,7 @@ namespace RemoteView.PageHandlers
                 page += "<p><b>Screen " + i + ":</b> '" + screens[i].DeviceName + "', Width:" + screens[i].Bounds.Width + ", Height:" + screens[i].Bounds.Height + "</p>";
             }
 
-            return buildHTML(page);
+            return BuildHTML(page);
         }
     }
 }

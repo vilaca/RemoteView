@@ -11,7 +11,7 @@ namespace RemoteView
 {
     class Program
     {
-        static string ApplicationName
+        private static string ApplicationName
         {
             get
             {
@@ -48,7 +48,7 @@ namespace RemoteView
 
             // make sure only one instance is online
 
-            if (!conf.AllowMultiple && GetRunningProcesses() != 1)
+            if (!conf.AllowMultiple && GetRunningProcessesAmount() != 1)
             {
                 Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
                 return;
@@ -78,7 +78,7 @@ namespace RemoteView
         /// Get amount of processes with the same name as this program that are currently running on the system
         /// </summary>
         /// <returns>n processes</returns>
-        private static int GetRunningProcesses()
+        private static int GetRunningProcessesAmount()
         {
             Process[] runningProcesses;
             runningProcesses = Process.GetProcessesByName(ApplicationName);

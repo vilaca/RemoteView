@@ -103,6 +103,7 @@ namespace RemoteView
 
             try
             {
+                Console.WriteLine("Spawning new instance of process.");
                 Process.Start(processInfo);
             }
             catch (Exception)
@@ -150,6 +151,7 @@ namespace RemoteView
             Console.WriteLine("Syntax: " + ApplicationName + " [Port to listen] [Options]");
             Console.WriteLine("Example: " + ApplicationName + " 6060 -b");
             Console.WriteLine("Options: -b :\tDon't show banner message;");
+            Console.WriteLine("         -m :\tAllow multiple instances;");
             Console.WriteLine("         -h :\tHelp (This screen);");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");
             //            Console.WriteLine("\t-u :\tUninstall as Windows service");

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -87,15 +85,7 @@ namespace RemoteView
         /// <param name="conf">server configuration</param>
         private static void RunServer(Configuration conf)
         {
-            Server server = new Server();
-
-            new Thread(() =>
-            {
-                server.Start(conf.Port);
-            }).Start();
-
-            // works!
-            Thread.Sleep(2000);
+            Server server = new Server().Start(conf.Port);
 
             if (!server.IsRunning())
             {

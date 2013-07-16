@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace RemoteView
 {
@@ -54,20 +55,29 @@ namespace RemoteView
         /// Start server
         /// </summary>
         /// <param name="port">port to listen to</param>
-        public void Start(int port)
+        public Server Start(int port)
         {
             try
             {
                 listener.Prefixes.Add("http://*:" + port + "/");
                 listener.IgnoreWriteExceptions = true;
                 listener.Start();
+
+                new Thread(Start).Start();
             }
             catch
             {
                 Console.WriteLine("Could not listen on port: {0}.", port);
-                return;
             }
 
+            return this;
+        }
+
+        /// <summary>
+        /// This where the server runs
+        /// </summary>
+        private void Start()
+        {
             do
             {
                 HttpListenerResponse response = null;

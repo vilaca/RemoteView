@@ -11,7 +11,7 @@ namespace RemoteView.PageHandlers
     /// This class is heavily based on source code presented as an answer at
     /// http://stackoverflow.com/questions/8021954/sendinput-doesnt-perform-click-mouse-button-unless-i-move-cursor
     /// </summary>
-    abstract class AbstractClickPageHandler : AbstractPageHandler
+    class DesktopAccess
     {
         enum SystemMetric
         {
@@ -97,17 +97,17 @@ namespace RemoteView.PageHandlers
             public IntPtr dwExtraInfo;
         }
 
-        public int CalculateAbsoluteCoordinateX(int x)
+        public static int CalculateAbsoluteCoordinateX(int x)
         {
             return (x * 65536) / GetSystemMetrics(SystemMetric.SM_CXSCREEN);
         }
 
-        public int CalculateAbsoluteCoordinateY(int y)
+        public static int CalculateAbsoluteCoordinateY(int y)
         {
             return (y * 65536) / GetSystemMetrics(SystemMetric.SM_CYSCREEN);
         }
 
-        public void LeftMouseButton(MouseEventFlags mouseEventFlags, int x, int y)
+        public static void LeftMouseButton(MouseEventFlags mouseEventFlags, int x, int y)
         {
             INPUT mouseInput = new INPUT();
             mouseInput.type = SendInputEventType.InputMouse;
@@ -122,7 +122,7 @@ namespace RemoteView.PageHandlers
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
         }
 
-        public void ClickRightMouseButton(int x, int y)
+        public static void ClickRightMouseButton(int x, int y)
         {
             INPUT mouseInput = new INPUT();
             mouseInput.type = SendInputEventType.InputMouse;
@@ -140,7 +140,7 @@ namespace RemoteView.PageHandlers
             SendInput(1, ref mouseInput, Marshal.SizeOf(new INPUT()));
         }
 
-        public void MoveMouse(int x, int y)
+        public static void MoveMouse(int x, int y)
         {
             INPUT mouseInput = new INPUT();
             mouseInput.type = SendInputEventType.InputMouse;

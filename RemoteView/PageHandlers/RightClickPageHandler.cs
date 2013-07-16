@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class RightClickPageHandler : AbstractClickPageHandler
+    class RightClickPageHandler: AbstractPageHandler
     {
         // screen devices list
         private Screen[] screens = Screen.AllScreens;
@@ -53,7 +53,7 @@ namespace RemoteView.PageHandlers
             x = device.Bounds.X + x;
             y = device.Bounds.X + y;
 
-            ClickRightMouseButton(x,y);
+            DesktopAccess.ClickRightMouseButton(x,y);
 
             return BuildHTML("Updating...");
         }

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
-    <Compile Include="PageHandlers\AbstractClickPageHandler.cs" />
+    <Compile Include="DesktopAccess.cs" />
     <Compile Include="PageHandlers\AbstractPageHandler.cs" />
     <Compile Include="PageHandlers\HomePageHandler.cs" />
     <Compile Include="PageHandlers\IconPageHandler.cs" />

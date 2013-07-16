@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class MouseMovePageHandler: AbstractClickPageHandler
+    class MouseMovePageHandler: AbstractPageHandler
     {
         // screen devices list
         private Screen[] screens = Screen.AllScreens;
@@ -46,7 +46,7 @@ namespace RemoteView.PageHandlers
             x = device.Bounds.X + x;
             y = device.Bounds.X + y;
 
-            MoveMouse(x, y);
+            DesktopAccess.MoveMouse(x, y);
 
             return BuildHTML("Updating...");
         }

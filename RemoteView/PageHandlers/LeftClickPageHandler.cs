@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class LeftClickPageHandler : AbstractClickPageHandler
+    class LeftClickPageHandler: AbstractPageHandler
     {
         // screen devices list
         private Screen[] screens = Screen.AllScreens;
@@ -71,7 +71,7 @@ namespace RemoteView.PageHandlers
             x = device.Bounds.X + x;
             y = device.Bounds.X + y;
 
-            LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
+            DesktopAccess.LeftMouseButton(DesktopAccess.MouseEventFlags.MOUSEEVENTF_LEFTDOWN, x, y);
 
             return false;
         }
@@ -101,7 +101,7 @@ namespace RemoteView.PageHandlers
             x = device.Bounds.X + x;
             y = device.Bounds.X + y;
 
-            LeftMouseButton(MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
+            DesktopAccess.LeftMouseButton(DesktopAccess.MouseEventFlags.MOUSEEVENTF_LEFTUP, x, y);
 
             return false;
         }

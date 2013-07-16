@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Reflection;
-using System.Security.Principal;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -53,14 +52,6 @@ namespace RemoteView
             if (!conf.AllowMultiple && !InstanceIsUnique())
             {
                 Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
-                return;
-            }
-
-            // get admin level
-
-            if (!IsRunningAsAdministrator())
-            {
-                RunAsAdministrator(args);
                 return;
             }
 
@@ -155,11 +146,6 @@ namespace RemoteView
             Console.WriteLine("         -h :\tHelp (This screen);");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");
             //            Console.WriteLine("\t-u :\tUninstall as Windows service");
-        }
-
-        private static bool IsRunningAsAdministrator()
-        {
-            return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         }
     }
 }

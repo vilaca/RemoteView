@@ -82,28 +82,6 @@ namespace RemoteView
         }
 
         /// <summary>
-        /// Relaunch this Application with Admin user level if possible
-        /// </summary>
-        /// <param name="args"></param>
-        private static void RunAsAdministrator(string[] args)
-        {
-            ProcessStartInfo processInfo = new ProcessStartInfo(Assembly.GetExecutingAssembly().CodeBase);
-            processInfo.UseShellExecute = true;
-            processInfo.Verb = "runas";
-            processInfo.Arguments = String.Join(" ", args);
-
-            try
-            {
-                Console.WriteLine("Spawning new instance of process.");
-                Process.Start(processInfo);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Needs administrator rights.");
-            }
-        }
-
-        /// <summary>
         /// Run server
         /// </summary>
         /// <param name="conf">server configuration</param>

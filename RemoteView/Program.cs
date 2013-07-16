@@ -11,6 +11,8 @@ namespace RemoteView
 {
     class Program
     {
+        static Mutex mutex = new Mutex(true, "-RemoteView-Mutex-");
+
         private static string ApplicationName
         {
             get
@@ -48,7 +50,7 @@ namespace RemoteView
 
             // make sure only one instance is online
 
-            if (!conf.AllowMultiple && GetRunningProcessesAmount() != 1)
+            if (!conf.AllowMultiple && !InstanceIsUnique())
             {
                 Console.WriteLine("Only one instance of process allowed. User -m for muliple instances.");
                 return;
@@ -75,14 +77,17 @@ namespace RemoteView
         }
 
         /// <summary>
-        /// Get amount of processes with the same name as this program that are currently running on the system
+        /// Find out if there are one or more instances of this program running
         /// </summary>
         /// <returns>n processes</returns>
-        private static int GetRunningProcessesAmount()
+        private static bool InstanceIsUnique()
         {
-            Process[] runningProcesses;
-            runningProcesses = Process.GetProcessesByName(ApplicationName);
-            return runningProcesses.Length;
+            if (mutex.WaitOne(TimeSpan.Zero, true))
+            {
+                mutex.ReleaseMutex();
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RemoteView.PageHandlers
 {
-    class ScreenPageHandler : AbstractPageHandler
+    sealed class ScreenPageHandler : AbstractPageHandler, IDisposable
     {
         private volatile byte[][] caches = new byte[Screen.AllScreens.Length][];
         private volatile int lastScreenRequested = 0;
@@ -78,6 +78,11 @@ namespace RemoteView.PageHandlers
                 bmp.Save(ms, ImageFormat.Png);
                 return ms.GetBuffer();
             }
+        }
+
+        public void Dispose()
+        {
+            timer.Dispose();
         }
     }
 }

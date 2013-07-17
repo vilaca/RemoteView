@@ -8,13 +8,13 @@ using System.Threading;
 
 namespace RemoteView
 {
-    sealed class Server: IDisposable
+    sealed class Server : IDisposable
     {
         /// <summary>
         /// Keep list of all resources to be invoked according to received HTTP requests
         /// </summary>
         private Dictionary<String, AbstractPageHandler> decoder = new Dictionary<string, AbstractPageHandler>();
-        
+
         /// <summary>
         /// HTTP listener for server
         /// </summary>
@@ -151,6 +151,16 @@ namespace RemoteView
         public void Dispose()
         {
             if (listener != null) listener.Close();
+
+            // some page handlers might need to be disposed
+
+            foreach (AbstractPageHandler page in decoder.Values)
+            {
+                if (page is IDisposable)
+                {
+                    ((IDisposable)page).Dispose();
+                }
+            }
         }
     }
 }

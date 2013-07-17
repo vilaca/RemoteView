@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FxCopProject Version="10.0" Name="My FxCop Project">
+ <ProjectOptions>
+  <SharedProject>True</SharedProject>
+  <Stylesheet Apply="False">$(FxCopDir)\Xml\FxCopReport.xsl</Stylesheet>
+  <SaveMessages>
+   <Project Status="Active, Excluded, Good, Noise" NewOnly="False" />
+   <Report Status="Active, Good, Noise" NewOnly="False" />
+  </SaveMessages>
+  <ProjectFile Compress="True" DefaultTargetCheck="True" DefaultRuleCheck="True" SaveByRuleGroup="" Deterministic="True" />
+  <EnableMultithreadedLoad>True</EnableMultithreadedLoad>
+  <EnableMultithreadedAnalysis>True</EnableMultithreadedAnalysis>
+  <SourceLookup>True</SourceLookup>
+  <AnalysisExceptionsThreshold>10</AnalysisExceptionsThreshold>
+  <RuleExceptionsThreshold>1</RuleExceptionsThreshold>
+  <Spelling Locale="en-US" />
+  <OverrideRuleVisibilities>False</OverrideRuleVisibilities>
+  <CustomDictionaries SearchFxCopDir="True" SearchUserProfile="True" SearchProjectDir="True" />
+  <SearchGlobalAssemblyCache>False</SearchGlobalAssemblyCache>
+  <DeadlockDetectionTimeout>120</DeadlockDetectionTimeout>
+  <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
+ </ProjectOptions>
+ <Targets>
+  <Target Name="$(ProjectDir)/RemoteView/bin/Release/RemoteView.exe" Analyze="True" AnalyzeAllChildren="True" />
+ </Targets>
+ <Rules>
+  <RuleFiles>
+   <RuleFile Name="$(FxCopDir)\Rules\DesignRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\GlobalizationRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\InteroperabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\MobilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\NamingRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PerformanceRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\PortabilityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\SecurityTransparencyRules.dll" Enabled="True" AllRulesEnabled="True" />
+   <RuleFile Name="$(FxCopDir)\Rules\UsageRules.dll" Enabled="True" AllRulesEnabled="True" />
+  </RuleFiles>
+  <Groups />
+  <Settings />
+ </Rules>
+ <FxCopReport Version="10.0">
+  <Targets>
+   <Target Name="$(ProjectDir)/RemoteView/bin/Release/RemoteView.exe">
+    <Modules>
+     <Module Name="remoteview.exe">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Created="2013-07-17 20:21:53Z">
+        <Issue Name="NoStrongName">
+         <Item>'RemoteView.exe'</Item>
+        </Issue>
+       </Message>
+       <Message TypeName="MarkWindowsFormsEntryPointsWithStaThread" Category="Microsoft.Usage" CheckId="CA2232" Created="2013-07-17 20:21:53Z">
+        <Issue>
+         <Item>'Program.Main(string[])'</Item>
+         <Item>'RemoteView.exe'</Item>
+        </Issue>
+       </Message>
+      </Messages>
+      <Namespaces>
+       <Namespace Name="RemoteView">
+        <Types>
+         <Type Name="Configuration">
+          <Members>
+           <Member Name="#create(System.String[])">
+            <Messages>
+             <Message Id="System.String.Format(System.String,System.Object)" TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305" Created="2013-07-17 20:21:53Z">
+              <Issue Name="IFormatProviderAlternateString">
+               <Item>'string.Format(string, object)'</Item>
+               <Item>'Configuration.create(string[])'</Item>
+               <Item>'string.Format(IFormatProvider, string, params object[])'</Item>
+               <Item>'CultureInfo.CurrentCulture'</Item>
+               <Item>'CultureInfo.InvariantCulture'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods">
+          <Members>
+           <Member Name="#ClickRightMouseButton(System.Int32,System.Int32)">
+            <Messages>
+             <Message Id="RemoteView.NativeMethods.SendInput(System.UInt32,RemoteView.NativeMethods+INPUT@,System.Int32)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Created="2013-07-17 20:29:44Z">
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.ClickRightMouseButton(int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.ClickRightMouseButton(int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.ClickRightMouseButton(int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#LeftMouseButton(RemoteView.NativeMethods+MouseEventFlags,System.Int32,System.Int32)">
+            <Messages>
+             <Message Id="RemoteView.NativeMethods.SendInput(System.UInt32,RemoteView.NativeMethods+INPUT@,System.Int32)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Created="2013-07-17 20:29:44Z">
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.LeftMouseButton(NativeMethods.MouseEventFlags, int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.LeftMouseButton(NativeMethods.MouseEventFlags, int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#MoveMouse(System.Int32,System.Int32)">
+            <Messages>
+             <Message Id="RemoteView.NativeMethods.SendInput(System.UInt32,RemoteView.NativeMethods+INPUT@,System.Int32)" TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806" Created="2013-07-17 20:29:44Z">
+              <Issue Name="HResultOrErrorCode">
+               <Item>'NativeMethods.MoveMouse(int, int)'</Item>
+               <Item>'NativeMethods.SendInput(uint, ref NativeMethods.INPUT, int)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NativeMethods+MouseKeybdhardwareInputUnion">
+          <Members>
+           <Member Name="#hi">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2013-07-17 20:29:44Z">
+              <Issue>
+               <Item>'NativeMethods.MouseKeybdhardwareInputUnion.hi'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ki">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Created="2013-07-17 20:29:44Z">
+              <Issue>
+               <Item>'NativeMethods.MouseKeybdhardwareInputUnion.ki'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Server">
+          <Members>
+           <Member Name="#Dispose()">
+            <Messages>
+             <Message TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800" Created="2013-07-17 20:21:53Z">
+              <Issue Name="Local">
+               <Item>'page'</Item>
+               <Item>'IDisposable'</Item>
+               <Item>'Server.Dispose()'</Item>
+               <Item>castclass</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Start()">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'Server.Start()'</Item>
+               <Item>'Exception'</Item>
+              </Issue>
+              <Issue>
+               <Item>'Server.Start()'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Start(System.Int32)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'Server.Start(int)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+       <Namespace Name="RemoteView.PageHandlers">
+        <Types>
+         <Type Name="AbstractPageHandler">
+          <Members>
+           <Member Name="#GetRequestedScreenDevice(System.String[],System.Windows.Forms.Screen[])">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'AbstractPageHandler.GetRequestedScreenDevice(string[], Screen[])'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="LeftClickPageHandler">
+          <Members>
+           <Member Name="#handleMouseDown(System.String[],System.Int32)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'LeftClickPageHandler.handleMouseDown(string[], int)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#handleMouseUp(System.String[],System.Int32)">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'LeftClickPageHandler.handleMouseUp(string[], int)'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="MouseMovePageHandler">
+          <Members>
+           <Member Name="#HandleRequest(System.Net.HttpListenerResponse,System.String[])">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'MouseMovePageHandler.HandleRequest(HttpListenerResponse, string[])'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="RightClickPageHandler">
+          <Members>
+           <Member Name="#HandleRequest(System.Net.HttpListenerResponse,System.String[])">
+            <Messages>
+             <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Created="2013-07-17 20:21:53Z">
+              <Issue>
+               <Item>'RightClickPageHandler.HandleRequest(HttpListenerResponse, string[])'</Item>
+               <Item>'object'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
+      </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+  </Targets>
+  <Rules>
+   <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+    <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCastUnnecessarily" Category="Microsoft.Performance" CheckId="CA1800">
+    <Resolution Name="Local">{0}, a variable, is cast to type {1} multiple times in method {2}. Cache the result of the 'as' operator or direct cast in order to eliminate the redundant {3} instruction.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+    <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   </Rule>
+   <Rule TypeName="DoNotIgnoreMethodResults" Category="Microsoft.Usage" CheckId="CA1806">
+    <Resolution Name="HResultOrErrorCode">{0} calls {1} but does not use the HRESULT or error code that the method returns. This could lead to unexpected behavior in error conditions or low-resource situations. Use the result in a conditional statement, assign the result to a variable, or pass it as an argument to another method.</Resolution>
+   </Rule>
+   <Rule TypeName="MarkWindowsFormsEntryPointsWithStaThread" Category="Microsoft.Usage" CheckId="CA2232">
+    <Resolution Name="Default">Mark the entry point method {0} in assembly {1} with an STAThreadAttribute.</Resolution>
+   </Rule>
+   <Rule TypeName="SpecifyIFormatProvider" Category="Microsoft.Globalization" CheckId="CA1305">
+    <Resolution Name="IFormatProviderAlternateString">Because the behavior of {0} could vary based on the current user's locale settings, replace this call in {1} with a call to {2}. If the result of {2} will be displayed to the user, specify {3} as the 'IFormatProvider' parameter. Otherwise, if the result will be stored and accessed by software, such as when it is persisted to disk or to a database, specify {4}.</Resolution>
+   </Rule>
+  </Rules>
+ </FxCopReport>
+</FxCopProject>

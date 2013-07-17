@@ -18,6 +18,11 @@ namespace RemoteView
             }
         }
 
+        /// <summary>
+        /// Main method. Needs STAThreadAttribute as this App references System.Windows.Forms
+        /// </summary>
+        /// <param name="args"></param>
+        [STAThreadAttribute]
         static void Main(string[] args)
         {
 

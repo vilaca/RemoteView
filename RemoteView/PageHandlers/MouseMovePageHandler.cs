@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Net;
 using System.Windows.Forms;
 
@@ -21,8 +22,8 @@ namespace RemoteView.PageHandlers
             int x, y;
             try
             {
-                y = Convert.ToInt16(uri[3]);
-                x = Convert.ToInt16(uri[4]);
+                y = Convert.ToInt16(uri[3], CultureInfo.InvariantCulture);
+                x = Convert.ToInt16(uri[4], CultureInfo.InvariantCulture);
             }
             catch
             {

@@ -13,6 +13,13 @@ namespace RemoteView
     /// </summary>
     class NativeMethods
     {
+        /// <summary>
+        /// Don't allow instatiation of this class
+        /// </summary>
+        private NativeMethods()
+        {
+        }
+
         enum SystemMetric
         {
             SM_CXSCREEN = 0,

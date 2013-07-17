@@ -27,7 +27,7 @@ namespace RemoteView.PageHandlers
         /// <param name="uri">tokenized URI</param>
         /// <param name="screens">system screens</param>
         /// <returns>selected screen or default(0)</returns>
-        internal int GetRequestedScreenDevice(String[] uri, Screen[] screens)
+        internal static int GetRequestedScreenDevice(String[] uri, Screen[] screens)
         {
             int screen = 0;
             if (uri.Length > 2)
@@ -51,7 +51,7 @@ namespace RemoteView.PageHandlers
         /// </summary>
         /// <param name="content"></param>
         /// <returns></returns>
-        internal byte[] BuildHTML(string content)
+        internal static byte[] BuildHTML(string content)
         {
             return Encoding.UTF8.GetBytes("<!doctype html>" + Environment.NewLine +
                 "<head><title>Remote View</title></head>" + Environment.NewLine +

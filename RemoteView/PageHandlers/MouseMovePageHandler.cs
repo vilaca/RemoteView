@@ -46,7 +46,7 @@ namespace RemoteView.PageHandlers
             x = device.Bounds.X + x;
             y = device.Bounds.X + y;
 
-            DesktopAccess.MoveMouse(x, y);
+            NativeMethods.MoveMouse(x, y);
 
             return BuildHTML("Updating...");
         }

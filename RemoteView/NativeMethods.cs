@@ -4,14 +4,14 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace RemoteView.PageHandlers
+namespace RemoteView
 {
 
     /// <summary>
     /// This class is heavily based on source code presented as an answer at
     /// http://stackoverflow.com/questions/8021954/sendinput-doesnt-perform-click-mouse-button-unless-i-move-cursor
     /// </summary>
-    class DesktopAccess
+    class NativeMethods
     {
         enum SystemMetric
         {

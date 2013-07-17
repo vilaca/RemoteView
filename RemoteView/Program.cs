@@ -85,17 +85,18 @@ namespace RemoteView
         /// <param name="conf">server configuration</param>
         private static void RunServer(Configuration conf)
         {
-            Server server = new Server().Start(conf.Port);
-
-            if (!server.IsRunning())
+            using (Server server = new Server().Start(conf.Port))
             {
-                Console.WriteLine("Could not start server... Exiting.");
-                return;
-            }
+                if (!server.IsRunning())
+                {
+                    Console.WriteLine("Could not start server... Exiting.");
+                    return;
+                }
 
-            Console.WriteLine("Server running press [c] to stop");
-            while (server.IsRunning() && Console.ReadKey(true).Key != ConsoleKey.C) ;
-            server.Stop();
+                Console.WriteLine("Server running press [c] to stop");
+                while (server.IsRunning() && Console.ReadKey(true).Key != ConsoleKey.C) ;
+                server.Stop();
+            }
         }
 
         private static void ShowBanner()

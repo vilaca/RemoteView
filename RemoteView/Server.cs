@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace RemoteView
 {
-    class Server
+    sealed class Server: IDisposable
     {
         /// <summary>
         /// Keep list of all resources to be invoked according to received HTTP requests
@@ -129,8 +129,6 @@ namespace RemoteView
                 }
             }
             while (listener.IsListening);
-
-            listener.Stop();
         }
 
         /// <summary>
@@ -148,6 +146,11 @@ namespace RemoteView
         public bool IsRunning()
         {
             return listener.IsListening;
+        }
+
+        public void Dispose()
+        {
+            if (listener != null) listener.Close();
         }
     }
 }

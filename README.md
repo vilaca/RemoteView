@@ -8,6 +8,14 @@ No need for a dedicated client, any modern browser will do.
 Licensed as GPL. See license file or <http://www.gnu.org/licenses/>.
 
 
+Requirements
+============
+
+Server has been tested in both Windows XP 32 bits and Windows 7 64 bits. DotNet Framework 2.0 or better needed.
+
+Client has been tested with Chrome on the same Windows configurations as above but "should" work in any browser/OS combination. 
+
+
 Project Status
 ==============
 
@@ -28,3 +36,16 @@ The following roles are needed and open for contributors:
 - Code reviewer.
 
 See [TODO file](https://github.com/vilaca/RemoteView/blob/master/TODO.md) for more info on pending tasks.
+
+
+How does the Application work ?
+===============================
+
+This Application allows a user with a browser (client) control a remote computer (server).
+
+The Application is basically an embedded HTTP server that generates a simple HTML5 page with an image. That image is a representation of the current Screen Device of the Server.
+
+The Client see the remote computer Desktop by typing the server IP address into the browser. Clicks on the browser are sent to the remote computer so it can be effectively controlled remotely.
+
+
+

@@ -13,6 +13,8 @@ Project Status
 
 This application is already somewhat functional but a few features and code quality assurance are still needed.
 
+See [TODO file](https://github.com/vilaca/RemoteView/blob/master/TODO.md) for more info.
+
 
 Contributors Wanted
 ===================
@@ -25,5 +27,4 @@ The following roles are needed and open for contributors:
 - Beta tester;
 - Code reviewer.
 
-
-See TODO file for more info on pending tasks.
+See [TODO file](https://github.com/vilaca/RemoteView/blob/master/TODO.md) for more info on pending tasks.

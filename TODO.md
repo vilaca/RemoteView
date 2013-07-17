@@ -1,30 +1,30 @@
 TODOS
 ==========
 
+[ENH] - Enhancement / [BUG] - defect
 
-* Control panel for server settings
 
-* text input
+* [BUG] If image loading fails, last loaded image should not be replaced by empty container;
 
-* smart refresh rate
+* [BUG] Can't drag icons on remote desktop Server;
 
-* css for better layout
+* [ENH] Text Input from Client to Server;
 
-* keep last image if reloading fails
+* [ENH] Smart refresh rate - throttle the serialization of screen images depending on client request speed;
 
-* beta testing
+* [ENH] CSS - Improve layout using;
 
-* improve screen rendering performance
+* [ENH] Improve screen serialization on Server;
 
-* change mouse cursor on client according to remote computer
+* [ENH] Change mouse cursor on client according to remote Server mouse pointer;
 
-* improve readme
+* [ENH] Resize image on Client/Server;
 
-* resize image on client/server
+* [ENH] User authentication;
 
-* user authetication
+* [ENH] Unit tests;
 
-* can't drag icons on remote desktop
+* [ENH] Control panel for server settings - update speed, image quality (GIF/PNG/?) etc.
 
-* unit tests
+
 

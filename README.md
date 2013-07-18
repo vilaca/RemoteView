@@ -41,11 +41,13 @@ See [TODO file](https://github.com/vilaca/RemoteView/blob/master/TODO.md) for mo
 How does the Application work ?
 ===============================
 
-This Application allows a user with a browser (client) control a remote computer (server).
+This Application allows a user with a browser (client) to control a remote computer (server).
 
 The Application is basically an embedded HTTP server that generates a simple HTML5 page with an image. That image is a representation of the current Screen Device of the Server.
 
-The Client see the remote computer Desktop by typing the server IP address into the browser. Clicks on the browser are sent to the remote computer so it can be effectively controlled remotely.
+The Client sees the remote computer Desktop as a webpage on the browser. Clicks on the browser are sent to the remote computer.
+
+
 
 
 

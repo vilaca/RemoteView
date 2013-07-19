@@ -76,11 +76,11 @@ namespace RemoteView {
                     // Note: The GetContext method blocks while waiting for a request. 
                     HttpListenerContext context = listener.GetContext ();
 
-                    String[] uri = context.Request.RawUrl.Split ('/');
-
 #if DEBUG
                     Console.WriteLine (context.Request.RawUrl);
 #endif
+
+                    String[] uri = context.Request.RawUrl.Split ('/');
 
                     AbstractPageHandler page;
                     bool found = decoder.TryGetValue (uri [1], out page);

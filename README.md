@@ -8,6 +8,19 @@ No need for a dedicated client, any modern browser will do.
 Licensed as GPL. See license file or <http://www.gnu.org/licenses/>.
 
 
+Running the Server Application
+==============================
+
+Syntax: RemoteView [Port to listen] [Options]
+
+Example: RemoteView 6060 -b
+
+Options: -ip :  Bind ip;
+         -b  :  Don't show banner message;
+         -m  :  Allow multiple instances;
+         -h  :  Help (This screen);
+
+
 Requirements
 ============
 

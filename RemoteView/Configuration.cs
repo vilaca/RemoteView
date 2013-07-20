@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Globalization;
 
-namespace RemoteView {
-    class Configuration {
+namespace RemoteView
+{
+    class Configuration
+    {
         /// <summary>
         /// Allow multiple instances of process
         /// </summary>
@@ -34,7 +36,8 @@ namespace RemoteView {
         /// Private c'tor with default values for object instances
         /// Use factory method instead of instatiating c'tor
         /// </summary>
-        private Configuration () {
+        private Configuration()
+        {
             this.AllowMultiple = false;
             this.Banner = true;
             this.Help = false;
@@ -42,8 +45,9 @@ namespace RemoteView {
             this.IpAddress = "*";
         }
 
-        public static Configuration create (string[] parameters) {
-            Configuration conf = new Configuration ();
+        public static Configuration create(string[] parameters)
+        {
+            Configuration conf = new Configuration();
 
             // use default configuration if no parameters exist
 
@@ -52,41 +56,52 @@ namespace RemoteView {
 
             // cycle throught command line using enumerator on parameters array
 
-            IEnumerator enumerator = parameters.GetEnumerator ();
-            enumerator.MoveNext ();
+            IEnumerator enumerator = parameters.GetEnumerator();
+            enumerator.MoveNext();
 
             string parameter = (string)enumerator.Current;
 
             // parse if first parameter is a valid integer and use it as a port number for listener
 
             int port;
-            bool hasPortParameter = int.TryParse (parameter, out port);
+            bool hasPortParameter = int.TryParse(parameter, out port);
 
-            if (hasPortParameter) {
+            if (hasPortParameter)
+            {
                 conf.Port = port;
 
                 // continue parsing parameters (if they exist)
-                if (!enumerator.MoveNext ())
+                if (!enumerator.MoveNext())
                     return conf;
                 parameter = (string)enumerator.Current;
             }
 
-            do {
-                if (parameter.Equals ("-m")) {
+            do
+            {
+                if (parameter.Equals("-m"))
+                {
                     conf.AllowMultiple = true;
-                } else if (parameter.Equals ("-b")) {
+                }
+                else if (parameter.Equals("-b"))
+                {
                     conf.Banner = false;
-                } else if (parameter.Equals ("-h")) {
+                }
+                else if (parameter.Equals("-h"))
+                {
                     conf.Help = true;
-                } else if (parameter.Equals ("--ip")) {
-                    enumerator.MoveNext ();
+                }
+                else if (parameter.Equals("--ip"))
+                {
+                    enumerator.MoveNext();
                     conf.IpAddress = (string)enumerator.Current;
-                } else {
-                    throw new ArgumentException (string.Format ("Error: {0} is an invalid command line parameter.", parameter));
+                }
+                else
+                {
+                    throw new ArgumentException(string.Format("Error: {0} is an invalid command line parameter.", parameter));
                 }
 
                 parameter = (string)enumerator.Current;
-            } while (enumerator.MoveNext ());
+            } while (enumerator.MoveNext());
 
             return conf;
         }

@@ -116,8 +116,8 @@ namespace RemoteView
         {
             Console.WriteLine("Syntax: " + ApplicationName + " [Port to listen] [Options]");
             Console.WriteLine("Example: " + ApplicationName + " 6060 -b");
-            Console.WriteLine("         -ip :\tBind ip;");
-            Console.WriteLine("Options: -b  :\tDon't show banner message;");
+            Console.WriteLine("Options: -ip :\tBind ip;");
+            Console.WriteLine("         -b  :\tDon't show banner message;");
             Console.WriteLine("         -m  :\tAllow multiple instances;");
             Console.WriteLine("         -h  :\tHelp (This screen);");
             //            Console.WriteLine("\t-i :\tInstall as Windows service");

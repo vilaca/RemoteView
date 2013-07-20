@@ -90,7 +90,7 @@ namespace RemoteView
                 {
                     conf.Help = true;
                 }
-                else if (parameter.Equals("--ip"))
+                else if (parameter.Equals("-ip"))
                 {
                     enumerator.MoveNext();
                     conf.IpAddress = (string)enumerator.Current;

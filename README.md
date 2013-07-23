@@ -15,10 +15,15 @@ Syntax: RemoteView [Port to listen] [Options]
 
 Example: RemoteView 6060 -b
 
-Options: -ip :  Bind ip;
-         -b  :  Don't show banner message;
-         -m  :  Allow multiple instances;
-         -h  :  Help (This screen);
+Options:
+
+-ip :  Bind ip;
+
+ -b  :  Don't show banner message;
+         
+ -m  :  Allow multiple instances;
+         
+ -h  :  Help (This screen);
 
 
 Requirements
